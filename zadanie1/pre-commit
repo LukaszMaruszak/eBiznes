@@ -1,0 +1,10 @@
+#!/bin/bash
+
+echo "Running git pre-commit hook"
+
+ktlint
+
+STATUS=$?
+
+[ $STATUS -ne 0 ] && exit 1
+exit 0
