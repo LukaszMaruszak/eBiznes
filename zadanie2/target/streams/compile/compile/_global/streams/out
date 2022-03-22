@@ -1,0 +1,5 @@
+[0m[[0m[31merror[0m] [0m[0m/home/lukasz/ebiznes/eBiznes/zadanie2/conf/routes:2:1: type ProductsRouter is not a member of package v1.post[0m
+[0m[[0m[31merror[0m] [0m[0m->         /v1/products            v1.post.ProductsRouter[0m
+[0m[[0m[31merror[0m] [0m[0m/home/lukasz/ebiznes/eBiznes/zadanie2/conf/routes:2:1: type ProductsRouter is not a member of package v1.post[0m
+[0m[[0m[31merror[0m] [0m[0m->         /v1/products            v1.post.ProductsRouter[0m
+[0m[[0m[31merror[0m] [0m[0mtwo errors found[0m
