@@ -1,9 +1,9 @@
 import javax.inject._
-
 import com.google.inject.AbstractModule
 import net.codingwell.scalaguice.ScalaModule
 import play.api.{Configuration, Environment}
-import v1.post._
+import v1.category._
+import v1.shoppingCard._
 import v1.products._
 
 /**
@@ -16,8 +16,10 @@ class Module(environment: Environment, configuration: Configuration)
     with ScalaModule {
 
   override def configure() = {
-    bind[PostRepository].to[PostRepositoryImpl].in[Singleton]()
+    bind[ShoppingCardRepository].to[ShoppingCardRepositoryImpl].in[Singleton]()
 
     bind[ProductsRepository].to[ProductsRepositoryImpl].in[Singleton]()
+
+    bind[CategoryRepository].to[CategoryRepositoryImpl].in[Singleton]()
   }
 }

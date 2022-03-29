@@ -1,41 +1,264 @@
-2022-03-20 13:43:13,671 [INFO] from play.api.http.EnabledFilters in play-dev-mode-akka.actor.default-dispatcher-7 - Enabled Filters (see <https://www.playframework.com/documentation/latest/Filters>):
+2022-03-29 23:27:14,075 [ERROR] from play.api.http.DefaultHttpErrorHandler in play-dev-mode-akka.actor.default-dispatcher-9 - 
+
+! @7n6i1im6c - Internal server error, for (GET) [/v1/categories] ->
+ 
+play.api.UnexpectedException: Unexpected exception[CreationException: Unable to create injector, see the following errors:
+
+1) No implementation for v1.categories.CategoryRepository was bound.
+  while locating v1.categories.CategoryRepository
+    for the 2nd parameter of v1.categories.CategoryResourceHandler.<init>(CategoryResourceHandler.scala:26)
+  while locating v1.categories.CategoryResourceHandler
+    for the 2nd parameter of v1.categories.CategoryControllerComponents.<init>(CategoryActionBuilder.scala:94)
+  while locating v1.categories.CategoryControllerComponents
+    for the 1st parameter of v1.categories.CategoryController.<init>(CategoryController.scala:17)
+  while locating v1.categories.CategoryController
+    for the 1st parameter of v1.categories.CategoryRouter.<init>(CategoryRouter.scala:12)
+  while locating v1.categories.CategoryRouter
+    for the 4th parameter of router.Routes.<init>(Routes.scala:32)
+  at play.api.inject.RoutesProvider$.bindingsFromConfiguration(BuiltinModule.scala:139):
+Binding(class router.Routes to self) (via modules: com.google.inject.util.Modules$OverrideModule -> play.api.inject.guice.GuiceableModuleConversions$$anon$4)
+
+1 error]
+	at play.core.server.DevServerStart$$anon$1.reload(DevServerStart.scala:254)
+	at play.core.server.DevServerStart$$anon$1.get(DevServerStart.scala:148)
+	at play.core.server.AkkaHttpServer.handleRequest(AkkaHttpServer.scala:302)
+	at play.core.server.AkkaHttpServer.$anonfun$createServerBinding$1(AkkaHttpServer.scala:224)
+	at akka.stream.impl.fusing.MapAsync$$anon$30.onPush(Ops.scala:1307)
+	at akka.stream.impl.fusing.GraphInterpreter.processPush(GraphInterpreter.scala:542)
+	at akka.stream.impl.fusing.GraphInterpreter.processEvent(GraphInterpreter.scala:496)
+	at akka.stream.impl.fusing.GraphInterpreter.execute(GraphInterpreter.scala:390)
+	at akka.stream.impl.fusing.GraphInterpreterShell.runBatch(ActorGraphInterpreter.scala:650)
+	at akka.stream.impl.fusing.GraphInterpreterShell$AsyncInput.execute(ActorGraphInterpreter.scala:521)
+	at akka.stream.impl.fusing.GraphInterpreterShell.processEvent(ActorGraphInterpreter.scala:625)
+	at akka.stream.impl.fusing.ActorGraphInterpreter.akka$stream$impl$fusing$ActorGraphInterpreter$$processEvent(ActorGraphInterpreter.scala:800)
+	at akka.stream.impl.fusing.ActorGraphInterpreter$$anonfun$receive$1.applyOrElse(ActorGraphInterpreter.scala:818)
+	at akka.actor.Actor.aroundReceive(Actor.scala:537)
+	at akka.actor.Actor.aroundReceive$(Actor.scala:535)
+	at akka.stream.impl.fusing.ActorGraphInterpreter.aroundReceive(ActorGraphInterpreter.scala:716)
+	at akka.actor.ActorCell.receiveMessage(ActorCell.scala:580)
+	at akka.actor.ActorCell.invoke(ActorCell.scala:548)
+	at akka.dispatch.Mailbox.processMailbox(Mailbox.scala:270)
+	at akka.dispatch.Mailbox.run(Mailbox.scala:231)
+	at akka.dispatch.Mailbox.exec(Mailbox.scala:243)
+	at java.base/java.util.concurrent.ForkJoinTask.doExec(ForkJoinTask.java:290)
+	at java.base/java.util.concurrent.ForkJoinPool$WorkQueue.topLevelExec(ForkJoinPool.java:1020)
+	at java.base/java.util.concurrent.ForkJoinPool.scan(ForkJoinPool.java:1656)
+	at java.base/java.util.concurrent.ForkJoinPool.runWorker(ForkJoinPool.java:1594)
+	at java.base/java.util.concurrent.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:183)
+Caused by: com.google.inject.CreationException: Unable to create injector, see the following errors:
+
+1) No implementation for v1.categories.CategoryRepository was bound.
+  while locating v1.categories.CategoryRepository
+    for the 2nd parameter of v1.categories.CategoryResourceHandler.<init>(CategoryResourceHandler.scala:26)
+  while locating v1.categories.CategoryResourceHandler
+    for the 2nd parameter of v1.categories.CategoryControllerComponents.<init>(CategoryActionBuilder.scala:94)
+  while locating v1.categories.CategoryControllerComponents
+    for the 1st parameter of v1.categories.CategoryController.<init>(CategoryController.scala:17)
+  while locating v1.categories.CategoryController
+    for the 1st parameter of v1.categories.CategoryRouter.<init>(CategoryRouter.scala:12)
+  while locating v1.categories.CategoryRouter
+    for the 4th parameter of router.Routes.<init>(Routes.scala:32)
+  at play.api.inject.RoutesProvider$.bindingsFromConfiguration(BuiltinModule.scala:139):
+Binding(class router.Routes to self) (via modules: com.google.inject.util.Modules$OverrideModule -> play.api.inject.guice.GuiceableModuleConversions$$anon$4)
+
+1 error
+	at com.google.inject.internal.Errors.throwCreationExceptionIfErrorsExist(Errors.java:554)
+	at com.google.inject.internal.InternalInjectorCreator.initializeStatically(InternalInjectorCreator.java:161)
+	at com.google.inject.internal.InternalInjectorCreator.build(InternalInjectorCreator.java:108)
+	at com.google.inject.Guice.createInjector(Guice.java:87)
+	at com.google.inject.Guice.createInjector(Guice.java:78)
+	at play.api.inject.guice.GuiceBuilder.injector(GuiceInjectorBuilder.scala:200)
+	at play.api.inject.guice.GuiceApplicationBuilder.build(GuiceApplicationBuilder.scala:155)
+	at play.api.inject.guice.GuiceApplicationLoader.load(GuiceApplicationLoader.scala:21)
+	at play.core.server.DevServerStart$$anon$1.$anonfun$reload$2(DevServerStart.scala:193)
+	at play.utils.Threads$.withContextClassLoader(Threads.scala:22)
+	at play.core.server.DevServerStart$$anon$1.reload(DevServerStart.scala:185)
+	... 25 common frames omitted
+2022-03-29 23:30:25,282 [ERROR] from play.api.http.DefaultHttpErrorHandler in play-dev-mode-akka.actor.default-dispatcher-9 - 
+
+! @7n6i1im6c - Internal server error, for (GET) [/v1/posts] ->
+ 
+play.api.UnexpectedException: Unexpected exception[CreationException: Unable to create injector, see the following errors:
+
+1) No implementation for v1.categories.CategoryRepository was bound.
+  while locating v1.categories.CategoryRepository
+    for the 2nd parameter of v1.categories.CategoryResourceHandler.<init>(CategoryResourceHandler.scala:26)
+  while locating v1.categories.CategoryResourceHandler
+    for the 2nd parameter of v1.categories.CategoryControllerComponents.<init>(CategoryActionBuilder.scala:94)
+  while locating v1.categories.CategoryControllerComponents
+    for the 1st parameter of v1.categories.CategoryController.<init>(CategoryController.scala:17)
+  while locating v1.categories.CategoryController
+    for the 1st parameter of v1.categories.CategoryRouter.<init>(CategoryRouter.scala:12)
+  while locating v1.categories.CategoryRouter
+    for the 4th parameter of router.Routes.<init>(Routes.scala:32)
+  at play.api.inject.RoutesProvider$.bindingsFromConfiguration(BuiltinModule.scala:139):
+Binding(class router.Routes to self) (via modules: com.google.inject.util.Modules$OverrideModule -> play.api.inject.guice.GuiceableModuleConversions$$anon$4)
+
+1 error]
+	at play.core.server.DevServerStart$$anon$1.reload(DevServerStart.scala:254)
+	at play.core.server.DevServerStart$$anon$1.get(DevServerStart.scala:148)
+	at play.core.server.AkkaHttpServer.handleRequest(AkkaHttpServer.scala:302)
+	at play.core.server.AkkaHttpServer.$anonfun$createServerBinding$1(AkkaHttpServer.scala:224)
+	at akka.stream.impl.fusing.MapAsync$$anon$30.onPush(Ops.scala:1307)
+	at akka.stream.impl.fusing.GraphInterpreter.processPush(GraphInterpreter.scala:542)
+	at akka.stream.impl.fusing.GraphInterpreter.processEvent(GraphInterpreter.scala:496)
+	at akka.stream.impl.fusing.GraphInterpreter.execute(GraphInterpreter.scala:390)
+	at akka.stream.impl.fusing.GraphInterpreterShell.runBatch(ActorGraphInterpreter.scala:650)
+	at akka.stream.impl.fusing.GraphInterpreterShell$AsyncInput.execute(ActorGraphInterpreter.scala:521)
+	at akka.stream.impl.fusing.GraphInterpreterShell.processEvent(ActorGraphInterpreter.scala:625)
+	at akka.stream.impl.fusing.ActorGraphInterpreter.akka$stream$impl$fusing$ActorGraphInterpreter$$processEvent(ActorGraphInterpreter.scala:800)
+	at akka.stream.impl.fusing.ActorGraphInterpreter$$anonfun$receive$1.applyOrElse(ActorGraphInterpreter.scala:818)
+	at akka.actor.Actor.aroundReceive(Actor.scala:537)
+	at akka.actor.Actor.aroundReceive$(Actor.scala:535)
+	at akka.stream.impl.fusing.ActorGraphInterpreter.aroundReceive(ActorGraphInterpreter.scala:716)
+	at akka.actor.ActorCell.receiveMessage(ActorCell.scala:580)
+	at akka.actor.ActorCell.invoke(ActorCell.scala:548)
+	at akka.dispatch.Mailbox.processMailbox(Mailbox.scala:270)
+	at akka.dispatch.Mailbox.run(Mailbox.scala:231)
+	at akka.dispatch.Mailbox.exec(Mailbox.scala:243)
+	at java.base/java.util.concurrent.ForkJoinTask.doExec(ForkJoinTask.java:290)
+	at java.base/java.util.concurrent.ForkJoinPool$WorkQueue.topLevelExec(ForkJoinPool.java:1020)
+	at java.base/java.util.concurrent.ForkJoinPool.scan(ForkJoinPool.java:1656)
+	at java.base/java.util.concurrent.ForkJoinPool.runWorker(ForkJoinPool.java:1594)
+	at java.base/java.util.concurrent.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:183)
+Caused by: com.google.inject.CreationException: Unable to create injector, see the following errors:
+
+1) No implementation for v1.categories.CategoryRepository was bound.
+  while locating v1.categories.CategoryRepository
+    for the 2nd parameter of v1.categories.CategoryResourceHandler.<init>(CategoryResourceHandler.scala:26)
+  while locating v1.categories.CategoryResourceHandler
+    for the 2nd parameter of v1.categories.CategoryControllerComponents.<init>(CategoryActionBuilder.scala:94)
+  while locating v1.categories.CategoryControllerComponents
+    for the 1st parameter of v1.categories.CategoryController.<init>(CategoryController.scala:17)
+  while locating v1.categories.CategoryController
+    for the 1st parameter of v1.categories.CategoryRouter.<init>(CategoryRouter.scala:12)
+  while locating v1.categories.CategoryRouter
+    for the 4th parameter of router.Routes.<init>(Routes.scala:32)
+  at play.api.inject.RoutesProvider$.bindingsFromConfiguration(BuiltinModule.scala:139):
+Binding(class router.Routes to self) (via modules: com.google.inject.util.Modules$OverrideModule -> play.api.inject.guice.GuiceableModuleConversions$$anon$4)
+
+1 error
+	at com.google.inject.internal.Errors.throwCreationExceptionIfErrorsExist(Errors.java:554)
+	at com.google.inject.internal.InternalInjectorCreator.initializeStatically(InternalInjectorCreator.java:161)
+	at com.google.inject.internal.InternalInjectorCreator.build(InternalInjectorCreator.java:108)
+	at com.google.inject.Guice.createInjector(Guice.java:87)
+	at com.google.inject.Guice.createInjector(Guice.java:78)
+	at play.api.inject.guice.GuiceBuilder.injector(GuiceInjectorBuilder.scala:200)
+	at play.api.inject.guice.GuiceApplicationBuilder.build(GuiceApplicationBuilder.scala:155)
+	at play.api.inject.guice.GuiceApplicationLoader.load(GuiceApplicationLoader.scala:21)
+	at play.core.server.DevServerStart$$anon$1.$anonfun$reload$2(DevServerStart.scala:193)
+	at play.utils.Threads$.withContextClassLoader(Threads.scala:22)
+	at play.core.server.DevServerStart$$anon$1.reload(DevServerStart.scala:185)
+	... 25 common frames omitted
+2022-03-29 23:37:19,932 [ERROR] from play.api.http.DefaultHttpErrorHandler in play-dev-mode-akka.actor.default-dispatcher-16 - 
+
+! @7n6i1im6c - Internal server error, for (GET) [/v1/posts] ->
+ 
+play.api.UnexpectedException: Unexpected exception[CreationException: Unable to create injector, see the following errors:
+
+1) No implementation for v1.categories.CategoryRepository was bound.
+  while locating v1.categories.CategoryRepository
+    for the 2nd parameter of v1.categories.CategoryResourceHandler.<init>(CategoryResourceHandler.scala:26)
+  while locating v1.categories.CategoryResourceHandler
+    for the 2nd parameter of v1.categories.CategoryControllerComponents.<init>(CategoryActionBuilder.scala:94)
+  while locating v1.categories.CategoryControllerComponents
+    for the 1st parameter of v1.categories.CategoryController.<init>(CategoryController.scala:17)
+  while locating v1.categories.CategoryController
+    for the 1st parameter of v1.categories.CategoryRouter.<init>(CategoryRouter.scala:12)
+  while locating v1.categories.CategoryRouter
+    for the 4th parameter of router.Routes.<init>(Routes.scala:32)
+  at play.api.inject.RoutesProvider$.bindingsFromConfiguration(BuiltinModule.scala:139):
+Binding(class router.Routes to self) (via modules: com.google.inject.util.Modules$OverrideModule -> play.api.inject.guice.GuiceableModuleConversions$$anon$4)
+
+1 error]
+	at play.core.server.DevServerStart$$anon$1.reload(DevServerStart.scala:254)
+	at play.core.server.DevServerStart$$anon$1.get(DevServerStart.scala:148)
+	at play.core.server.AkkaHttpServer.handleRequest(AkkaHttpServer.scala:302)
+	at play.core.server.AkkaHttpServer.$anonfun$createServerBinding$1(AkkaHttpServer.scala:224)
+	at akka.stream.impl.fusing.MapAsync$$anon$30.onPush(Ops.scala:1307)
+	at akka.stream.impl.fusing.GraphInterpreter.processPush(GraphInterpreter.scala:542)
+	at akka.stream.impl.fusing.GraphInterpreter.processEvent(GraphInterpreter.scala:496)
+	at akka.stream.impl.fusing.GraphInterpreter.execute(GraphInterpreter.scala:390)
+	at akka.stream.impl.fusing.GraphInterpreterShell.runBatch(ActorGraphInterpreter.scala:650)
+	at akka.stream.impl.fusing.GraphInterpreterShell$AsyncInput.execute(ActorGraphInterpreter.scala:521)
+	at akka.stream.impl.fusing.GraphInterpreterShell.processEvent(ActorGraphInterpreter.scala:625)
+	at akka.stream.impl.fusing.ActorGraphInterpreter.akka$stream$impl$fusing$ActorGraphInterpreter$$processEvent(ActorGraphInterpreter.scala:800)
+	at akka.stream.impl.fusing.ActorGraphInterpreter$$anonfun$receive$1.applyOrElse(ActorGraphInterpreter.scala:818)
+	at akka.actor.Actor.aroundReceive(Actor.scala:537)
+	at akka.actor.Actor.aroundReceive$(Actor.scala:535)
+	at akka.stream.impl.fusing.ActorGraphInterpreter.aroundReceive(ActorGraphInterpreter.scala:716)
+	at akka.actor.ActorCell.receiveMessage(ActorCell.scala:580)
+	at akka.actor.ActorCell.invoke(ActorCell.scala:548)
+	at akka.dispatch.Mailbox.processMailbox(Mailbox.scala:270)
+	at akka.dispatch.Mailbox.run(Mailbox.scala:231)
+	at akka.dispatch.Mailbox.exec(Mailbox.scala:243)
+	at java.base/java.util.concurrent.ForkJoinTask.doExec(ForkJoinTask.java:290)
+	at java.base/java.util.concurrent.ForkJoinPool$WorkQueue.topLevelExec(ForkJoinPool.java:1020)
+	at java.base/java.util.concurrent.ForkJoinPool.scan(ForkJoinPool.java:1656)
+	at java.base/java.util.concurrent.ForkJoinPool.runWorker(ForkJoinPool.java:1594)
+	at java.base/java.util.concurrent.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:183)
+Caused by: com.google.inject.CreationException: Unable to create injector, see the following errors:
+
+1) No implementation for v1.categories.CategoryRepository was bound.
+  while locating v1.categories.CategoryRepository
+    for the 2nd parameter of v1.categories.CategoryResourceHandler.<init>(CategoryResourceHandler.scala:26)
+  while locating v1.categories.CategoryResourceHandler
+    for the 2nd parameter of v1.categories.CategoryControllerComponents.<init>(CategoryActionBuilder.scala:94)
+  while locating v1.categories.CategoryControllerComponents
+    for the 1st parameter of v1.categories.CategoryController.<init>(CategoryController.scala:17)
+  while locating v1.categories.CategoryController
+    for the 1st parameter of v1.categories.CategoryRouter.<init>(CategoryRouter.scala:12)
+  while locating v1.categories.CategoryRouter
+    for the 4th parameter of router.Routes.<init>(Routes.scala:32)
+  at play.api.inject.RoutesProvider$.bindingsFromConfiguration(BuiltinModule.scala:139):
+Binding(class router.Routes to self) (via modules: com.google.inject.util.Modules$OverrideModule -> play.api.inject.guice.GuiceableModuleConversions$$anon$4)
+
+1 error
+	at com.google.inject.internal.Errors.throwCreationExceptionIfErrorsExist(Errors.java:554)
+	at com.google.inject.internal.InternalInjectorCreator.initializeStatically(InternalInjectorCreator.java:161)
+	at com.google.inject.internal.InternalInjectorCreator.build(InternalInjectorCreator.java:108)
+	at com.google.inject.Guice.createInjector(Guice.java:87)
+	at com.google.inject.Guice.createInjector(Guice.java:78)
+	at play.api.inject.guice.GuiceBuilder.injector(GuiceInjectorBuilder.scala:200)
+	at play.api.inject.guice.GuiceApplicationBuilder.build(GuiceApplicationBuilder.scala:155)
+	at play.api.inject.guice.GuiceApplicationLoader.load(GuiceApplicationLoader.scala:21)
+	at play.core.server.DevServerStart$$anon$1.$anonfun$reload$2(DevServerStart.scala:193)
+	at play.utils.Threads$.withContextClassLoader(Threads.scala:22)
+	at play.core.server.DevServerStart$$anon$1.reload(DevServerStart.scala:185)
+	... 25 common frames omitted
+2022-03-29 23:45:33,934 [INFO] from play.api.http.EnabledFilters in play-dev-mode-akka.actor.default-dispatcher-6 - Enabled Filters (see <https://www.playframework.com/documentation/latest/Filters>):
 
     play.filters.csrf.CSRFFilter
     play.filters.headers.SecurityHeadersFilter
     play.filters.hosts.AllowedHostsFilter
 
-2022-03-20 13:43:13,697 [INFO] from play.api.Play in play-dev-mode-akka.actor.default-dispatcher-7 - Application started (Dev) (no global state)
-2022-03-20 13:43:14,224 [DEBUG] from application.ErrorHandler in application-akka.actor.default-dispatcher-7 - onClientError: statusCode = 404, uri = /, message = 
-2022-03-20 13:43:14,224 [DEBUG] from application.ErrorHandler in application-akka.actor.default-dispatcher-6 - onClientError: statusCode = 404, uri = /, message = 
-2022-03-20 13:43:14,523 [DEBUG] from application.ErrorHandler in play-dev-mode-akka.actor.default-dispatcher-9 - onClientError: statusCode = 404, uri = /favicon.ico, message = 
-2022-03-20 13:43:40,517 [DEBUG] from application.ErrorHandler in application-akka.actor.default-dispatcher-7 - onClientError: statusCode = 404, uri = /, message = 
-2022-03-20 13:44:23,048 [DEBUG] from application.ErrorHandler in application-akka.actor.default-dispatcher-7 - onClientError: statusCode = 404, uri = /posts/, message = 
-2022-03-20 13:44:49,642 [TRACE] from v1.post.PostActionBuilder in application-akka.actor.default-dispatcher-7 - invokeBlock: 
-2022-03-20 13:44:49,660 [TRACE] from v1.post.PostController in application-akka.actor.default-dispatcher-7 - index: 
-2022-03-20 13:44:49,677 [TRACE] from v1.post.PostRepositoryImpl in application-repository.dispatcher-8 - list: 
-2022-03-20 14:37:47,775 [ERROR] from play.api.http.DefaultHttpErrorHandler in play-dev-mode-akka.actor.default-dispatcher-12 - 
+2022-03-29 23:45:33,942 [INFO] from play.api.Play in play-dev-mode-akka.actor.default-dispatcher-6 - Application started (Dev) (no global state)
+2022-03-29 23:45:34,075 [TRACE] from v1.products.ProductsActionBuilder in application-akka.actor.default-dispatcher-6 - invokeBlock: 
+2022-03-29 23:45:34,077 [TRACE] from v1.products.ProductsController in application-akka.actor.default-dispatcher-6 - index: 
+2022-03-29 23:45:34,079 [TRACE] from v1.products.ProductsRepositoryImpl in application-repository.dispatcher-7 - list: 
+2022-03-29 23:46:34,183 [ERROR] from play.api.http.DefaultHttpErrorHandler in play-dev-mode-akka.actor.default-dispatcher-6 - 
 
-! @7n426c45k - Internal server error, for (GET) [/v1/products] ->
+! @7n6i46mg4 - Internal server error, for (GET) [/v1/category] ->
  
-play.sbt.PlayExceptions$CompilationException: Compilation error[not enough arguments for method apply: (id: v1.products.ProductId, title: String, price: String, category: String): v1.products.ProductData in object ProductData.
-Unspecified value parameter category.]
-	at play.sbt.PlayExceptions$CompilationException$.apply(PlayExceptions.scala:34)
-	at play.sbt.PlayExceptions$CompilationException$.apply(PlayExceptions.scala:34)
-	at scala.Option.map(Option.scala:230)
-	at play.sbt.run.PlayReload$.$anonfun$taskFailureHandler$8(PlayReload.scala:131)
-	at scala.Option.map(Option.scala:230)
-	at play.sbt.run.PlayReload$.taskFailureHandler(PlayReload.scala:104)
-	at play.sbt.run.PlayReload$.compileFailure(PlayReload.scala:38)
-	at play.sbt.run.PlayReload$.$anonfun$compile$3(PlayReload.scala:156)
-	at scala.util.Either$LeftProjection.map(Either.scala:573)
-	at play.sbt.run.PlayReload$.compile(PlayReload.scala:156)
-	at play.sbt.run.PlayRun$.$anonfun$playRunTask$4(PlayRun.scala:80)
-	at play.runsupport.Reloader.$anonfun$reload$1(Reloader.scala:496)
-	at play.runsupport.Reloader$$anon$1.run(Reloader.scala:57)
-	at java.base/java.security.AccessController.doPrivileged(Native Method)
-	at play.runsupport.Reloader$.play$runsupport$Reloader$$withReloaderContextClassLoader(Reloader.scala:63)
-	at play.runsupport.Reloader.reload(Reloader.scala:496)
-	at play.core.server.DevServerStart$$anon$1.get(DevServerStart.scala:147)
+play.api.UnexpectedException: Unexpected exception[CreationException: Unable to create injector, see the following errors:
+
+1) No implementation for v1.category.CategoryRepository was bound.
+  while locating v1.category.CategoryRepository
+    for the 2nd parameter of v1.category.CategoryResourceHandler.<init>(CategoryResourceHandler.scala:26)
+  while locating v1.category.CategoryResourceHandler
+    for the 2nd parameter of v1.category.CategoryControllerComponents.<init>(CategoryActionBuilder.scala:94)
+  while locating v1.category.CategoryControllerComponents
+    for the 1st parameter of v1.category.CategoryController.<init>(CategoryController.scala:17)
+  while locating v1.category.CategoryController
+    for the 1st parameter of v1.category.CategoryRouter.<init>(CategoryRouter.scala:12)
+  while locating v1.category.CategoryRouter
+    for the 4th parameter of router.Routes.<init>(Routes.scala:32)
+  at play.api.inject.RoutesProvider$.bindingsFromConfiguration(BuiltinModule.scala:139):
+Binding(class router.Routes to self) (via modules: com.google.inject.util.Modules$OverrideModule -> play.api.inject.guice.GuiceableModuleConversions$$anon$4)
+
+1 error]
+	at play.core.server.DevServerStart$$anon$1.reload(DevServerStart.scala:254)
+	at play.core.server.DevServerStart$$anon$1.get(DevServerStart.scala:148)
 	at play.core.server.AkkaHttpServer.handleRequest(AkkaHttpServer.scala:302)
 	at play.core.server.AkkaHttpServer.$anonfun$createServerBinding$1(AkkaHttpServer.scala:224)
 	at akka.stream.impl.fusing.MapAsync$$anon$30.onPush(Ops.scala:1307)
@@ -60,211 +283,292 @@ Unspecified value parameter category.]
 	at java.base/java.util.concurrent.ForkJoinPool.scan(ForkJoinPool.java:1656)
 	at java.base/java.util.concurrent.ForkJoinPool.runWorker(ForkJoinPool.java:1594)
 	at java.base/java.util.concurrent.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:183)
-2022-03-20 15:14:33,570 [ERROR] from play.api.http.DefaultHttpErrorHandler in play-dev-mode-akka.actor.default-dispatcher-5 - 
+Caused by: com.google.inject.CreationException: Unable to create injector, see the following errors:
 
-! @7n42b7he9 - Internal server error, for (GET) [/v1/products] ->
- 
-play.sbt.PlayExceptions$CompilationException: Compilation error[type ProductsRouter is not a member of package v1.post]
-	at play.sbt.PlayExceptions$CompilationException$.apply(PlayExceptions.scala:34)
-	at play.sbt.PlayExceptions$CompilationException$.apply(PlayExceptions.scala:34)
-	at scala.Option.map(Option.scala:230)
-	at play.sbt.run.PlayReload$.$anonfun$taskFailureHandler$8(PlayReload.scala:131)
-	at scala.Option.map(Option.scala:230)
-	at play.sbt.run.PlayReload$.taskFailureHandler(PlayReload.scala:104)
-	at play.sbt.run.PlayReload$.compileFailure(PlayReload.scala:38)
-	at play.sbt.run.PlayReload$.$anonfun$compile$3(PlayReload.scala:156)
-	at scala.util.Either$LeftProjection.map(Either.scala:573)
-	at play.sbt.run.PlayReload$.compile(PlayReload.scala:156)
-	at play.sbt.run.PlayRun$.$anonfun$playRunTask$4(PlayRun.scala:80)
-	at play.runsupport.Reloader.$anonfun$reload$1(Reloader.scala:496)
-	at play.runsupport.Reloader$$anon$1.run(Reloader.scala:57)
-	at java.base/java.security.AccessController.doPrivileged(Native Method)
-	at play.runsupport.Reloader$.play$runsupport$Reloader$$withReloaderContextClassLoader(Reloader.scala:63)
-	at play.runsupport.Reloader.reload(Reloader.scala:496)
-	at play.core.server.DevServerStart$$anon$1.get(DevServerStart.scala:147)
-	at play.core.server.AkkaHttpServer.handleRequest(AkkaHttpServer.scala:302)
-	at play.core.server.AkkaHttpServer.$anonfun$createServerBinding$1(AkkaHttpServer.scala:224)
-	at akka.stream.impl.fusing.MapAsync$$anon$30.onPush(Ops.scala:1307)
-	at akka.stream.impl.fusing.GraphInterpreter.processPush(GraphInterpreter.scala:542)
-	at akka.stream.impl.fusing.GraphInterpreter.processEvent(GraphInterpreter.scala:496)
-	at akka.stream.impl.fusing.GraphInterpreter.execute(GraphInterpreter.scala:390)
-	at akka.stream.impl.fusing.GraphInterpreterShell.runBatch(ActorGraphInterpreter.scala:650)
-	at akka.stream.impl.fusing.GraphInterpreterShell$AsyncInput.execute(ActorGraphInterpreter.scala:521)
-	at akka.stream.impl.fusing.GraphInterpreterShell.processEvent(ActorGraphInterpreter.scala:625)
-	at akka.stream.impl.fusing.ActorGraphInterpreter.akka$stream$impl$fusing$ActorGraphInterpreter$$processEvent(ActorGraphInterpreter.scala:800)
-	at akka.stream.impl.fusing.ActorGraphInterpreter$$anonfun$receive$1.applyOrElse(ActorGraphInterpreter.scala:818)
-	at akka.actor.Actor.aroundReceive(Actor.scala:537)
-	at akka.actor.Actor.aroundReceive$(Actor.scala:535)
-	at akka.stream.impl.fusing.ActorGraphInterpreter.aroundReceive(ActorGraphInterpreter.scala:716)
-	at akka.actor.ActorCell.receiveMessage(ActorCell.scala:580)
-	at akka.actor.ActorCell.invoke(ActorCell.scala:548)
-	at akka.dispatch.Mailbox.processMailbox(Mailbox.scala:270)
-	at akka.dispatch.Mailbox.run(Mailbox.scala:231)
-	at akka.dispatch.Mailbox.exec(Mailbox.scala:243)
-	at java.base/java.util.concurrent.ForkJoinTask.doExec(ForkJoinTask.java:290)
-	at java.base/java.util.concurrent.ForkJoinPool$WorkQueue.topLevelExec(ForkJoinPool.java:1020)
-	at java.base/java.util.concurrent.ForkJoinPool.scan(ForkJoinPool.java:1656)
-	at java.base/java.util.concurrent.ForkJoinPool.runWorker(ForkJoinPool.java:1594)
-	at java.base/java.util.concurrent.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:183)
-2022-03-20 15:15:21,038 [ERROR] from play.api.http.DefaultHttpErrorHandler in play-dev-mode-akka.actor.default-dispatcher-5 - 
+1) No implementation for v1.category.CategoryRepository was bound.
+  while locating v1.category.CategoryRepository
+    for the 2nd parameter of v1.category.CategoryResourceHandler.<init>(CategoryResourceHandler.scala:26)
+  while locating v1.category.CategoryResourceHandler
+    for the 2nd parameter of v1.category.CategoryControllerComponents.<init>(CategoryActionBuilder.scala:94)
+  while locating v1.category.CategoryControllerComponents
+    for the 1st parameter of v1.category.CategoryController.<init>(CategoryController.scala:17)
+  while locating v1.category.CategoryController
+    for the 1st parameter of v1.category.CategoryRouter.<init>(CategoryRouter.scala:12)
+  while locating v1.category.CategoryRouter
+    for the 4th parameter of router.Routes.<init>(Routes.scala:32)
+  at play.api.inject.RoutesProvider$.bindingsFromConfiguration(BuiltinModule.scala:139):
+Binding(class router.Routes to self) (via modules: com.google.inject.util.Modules$OverrideModule -> play.api.inject.guice.GuiceableModuleConversions$$anon$4)
 
-! @7n42ba9k1 - Internal server error, for (GET) [/v1/products] ->
- 
-play.sbt.PlayExceptions$CompilationException: Compilation error[type ProductsRouter is not a member of package v1.post]
-	at play.sbt.PlayExceptions$CompilationException$.apply(PlayExceptions.scala:34)
-	at play.sbt.PlayExceptions$CompilationException$.apply(PlayExceptions.scala:34)
-	at scala.Option.map(Option.scala:230)
-	at play.sbt.run.PlayReload$.$anonfun$taskFailureHandler$8(PlayReload.scala:131)
-	at scala.Option.map(Option.scala:230)
-	at play.sbt.run.PlayReload$.taskFailureHandler(PlayReload.scala:104)
-	at play.sbt.run.PlayReload$.compileFailure(PlayReload.scala:38)
-	at play.sbt.run.PlayReload$.$anonfun$compile$3(PlayReload.scala:156)
-	at scala.util.Either$LeftProjection.map(Either.scala:573)
-	at play.sbt.run.PlayReload$.compile(PlayReload.scala:156)
-	at play.sbt.run.PlayRun$.$anonfun$playRunTask$4(PlayRun.scala:80)
-	at play.runsupport.Reloader.$anonfun$reload$1(Reloader.scala:496)
-	at play.runsupport.Reloader$$anon$1.run(Reloader.scala:57)
-	at java.base/java.security.AccessController.doPrivileged(Native Method)
-	at play.runsupport.Reloader$.play$runsupport$Reloader$$withReloaderContextClassLoader(Reloader.scala:63)
-	at play.runsupport.Reloader.reload(Reloader.scala:496)
-	at play.core.server.DevServerStart$$anon$1.get(DevServerStart.scala:147)
-	at play.core.server.AkkaHttpServer.handleRequest(AkkaHttpServer.scala:302)
-	at play.core.server.AkkaHttpServer.$anonfun$createServerBinding$1(AkkaHttpServer.scala:224)
-	at akka.stream.impl.fusing.MapAsync$$anon$30.onPush(Ops.scala:1307)
-	at akka.stream.impl.fusing.GraphInterpreter.processPush(GraphInterpreter.scala:542)
-	at akka.stream.impl.fusing.GraphInterpreter.processEvent(GraphInterpreter.scala:496)
-	at akka.stream.impl.fusing.GraphInterpreter.execute(GraphInterpreter.scala:390)
-	at akka.stream.impl.fusing.GraphInterpreterShell.runBatch(ActorGraphInterpreter.scala:650)
-	at akka.stream.impl.fusing.GraphInterpreterShell$AsyncInput.execute(ActorGraphInterpreter.scala:521)
-	at akka.stream.impl.fusing.GraphInterpreterShell.processEvent(ActorGraphInterpreter.scala:625)
-	at akka.stream.impl.fusing.ActorGraphInterpreter.akka$stream$impl$fusing$ActorGraphInterpreter$$processEvent(ActorGraphInterpreter.scala:800)
-	at akka.stream.impl.fusing.ActorGraphInterpreter$$anonfun$receive$1.applyOrElse(ActorGraphInterpreter.scala:818)
-	at akka.actor.Actor.aroundReceive(Actor.scala:537)
-	at akka.actor.Actor.aroundReceive$(Actor.scala:535)
-	at akka.stream.impl.fusing.ActorGraphInterpreter.aroundReceive(ActorGraphInterpreter.scala:716)
-	at akka.actor.ActorCell.receiveMessage(ActorCell.scala:580)
-	at akka.actor.ActorCell.invoke(ActorCell.scala:548)
-	at akka.dispatch.Mailbox.processMailbox(Mailbox.scala:270)
-	at akka.dispatch.Mailbox.run(Mailbox.scala:231)
-	at akka.dispatch.Mailbox.exec(Mailbox.scala:243)
-	at java.base/java.util.concurrent.ForkJoinTask.doExec(ForkJoinTask.java:290)
-	at java.base/java.util.concurrent.ForkJoinPool$WorkQueue.topLevelExec(ForkJoinPool.java:1020)
-	at java.base/java.util.concurrent.ForkJoinPool.scan(ForkJoinPool.java:1656)
-	at java.base/java.util.concurrent.ForkJoinPool.runWorker(ForkJoinPool.java:1594)
-	at java.base/java.util.concurrent.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:183)
-2022-03-20 15:16:44,242 [ERROR] from play.api.http.DefaultHttpErrorHandler in play-dev-mode-akka.actor.default-dispatcher-16 - 
-
-! @7n42bf2m6 - Internal server error, for (GET) [/v1/products] ->
- 
-play.sbt.PlayExceptions$CompilationException: Compilation error[type ProductsRouter is not a member of package v1.post]
-	at play.sbt.PlayExceptions$CompilationException$.apply(PlayExceptions.scala:34)
-	at play.sbt.PlayExceptions$CompilationException$.apply(PlayExceptions.scala:34)
-	at scala.Option.map(Option.scala:230)
-	at play.sbt.run.PlayReload$.$anonfun$taskFailureHandler$8(PlayReload.scala:131)
-	at scala.Option.map(Option.scala:230)
-	at play.sbt.run.PlayReload$.taskFailureHandler(PlayReload.scala:104)
-	at play.sbt.run.PlayReload$.compileFailure(PlayReload.scala:38)
-	at play.sbt.run.PlayReload$.$anonfun$compile$3(PlayReload.scala:156)
-	at scala.util.Either$LeftProjection.map(Either.scala:573)
-	at play.sbt.run.PlayReload$.compile(PlayReload.scala:156)
-	at play.sbt.run.PlayRun$.$anonfun$playRunTask$4(PlayRun.scala:80)
-	at play.runsupport.Reloader.$anonfun$reload$1(Reloader.scala:496)
-	at play.runsupport.Reloader$$anon$1.run(Reloader.scala:57)
-	at java.base/java.security.AccessController.doPrivileged(Native Method)
-	at play.runsupport.Reloader$.play$runsupport$Reloader$$withReloaderContextClassLoader(Reloader.scala:63)
-	at play.runsupport.Reloader.reload(Reloader.scala:496)
-	at play.core.server.DevServerStart$$anon$1.get(DevServerStart.scala:147)
-	at play.core.server.AkkaHttpServer.handleRequest(AkkaHttpServer.scala:302)
-	at play.core.server.AkkaHttpServer.$anonfun$createServerBinding$1(AkkaHttpServer.scala:224)
-	at akka.stream.impl.fusing.MapAsync$$anon$30.onPush(Ops.scala:1307)
-	at akka.stream.impl.fusing.GraphInterpreter.processPush(GraphInterpreter.scala:542)
-	at akka.stream.impl.fusing.GraphInterpreter.processEvent(GraphInterpreter.scala:496)
-	at akka.stream.impl.fusing.GraphInterpreter.execute(GraphInterpreter.scala:390)
-	at akka.stream.impl.fusing.GraphInterpreterShell.runBatch(ActorGraphInterpreter.scala:650)
-	at akka.stream.impl.fusing.GraphInterpreterShell$AsyncInput.execute(ActorGraphInterpreter.scala:521)
-	at akka.stream.impl.fusing.GraphInterpreterShell.processEvent(ActorGraphInterpreter.scala:625)
-	at akka.stream.impl.fusing.ActorGraphInterpreter.akka$stream$impl$fusing$ActorGraphInterpreter$$processEvent(ActorGraphInterpreter.scala:800)
-	at akka.stream.impl.fusing.ActorGraphInterpreter$$anonfun$receive$1.applyOrElse(ActorGraphInterpreter.scala:818)
-	at akka.actor.Actor.aroundReceive(Actor.scala:537)
-	at akka.actor.Actor.aroundReceive$(Actor.scala:535)
-	at akka.stream.impl.fusing.ActorGraphInterpreter.aroundReceive(ActorGraphInterpreter.scala:716)
-	at akka.actor.ActorCell.receiveMessage(ActorCell.scala:580)
-	at akka.actor.ActorCell.invoke(ActorCell.scala:548)
-	at akka.dispatch.Mailbox.processMailbox(Mailbox.scala:270)
-	at akka.dispatch.Mailbox.run(Mailbox.scala:231)
-	at akka.dispatch.Mailbox.exec(Mailbox.scala:243)
-	at java.base/java.util.concurrent.ForkJoinTask.doExec(ForkJoinTask.java:290)
-	at java.base/java.util.concurrent.ForkJoinPool$WorkQueue.topLevelExec(ForkJoinPool.java:1020)
-	at java.base/java.util.concurrent.ForkJoinPool.scan(ForkJoinPool.java:1656)
-	at java.base/java.util.concurrent.ForkJoinPool.runWorker(ForkJoinPool.java:1594)
-	at java.base/java.util.concurrent.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:183)
-2022-03-20 15:22:23,110 [INFO] from play.api.http.EnabledFilters in play-dev-mode-akka.actor.default-dispatcher-22 - Enabled Filters (see <https://www.playframework.com/documentation/latest/Filters>):
+1 error
+	at com.google.inject.internal.Errors.throwCreationExceptionIfErrorsExist(Errors.java:554)
+	at com.google.inject.internal.InternalInjectorCreator.initializeStatically(InternalInjectorCreator.java:161)
+	at com.google.inject.internal.InternalInjectorCreator.build(InternalInjectorCreator.java:108)
+	at com.google.inject.Guice.createInjector(Guice.java:87)
+	at com.google.inject.Guice.createInjector(Guice.java:78)
+	at play.api.inject.guice.GuiceBuilder.injector(GuiceInjectorBuilder.scala:200)
+	at play.api.inject.guice.GuiceApplicationBuilder.build(GuiceApplicationBuilder.scala:155)
+	at play.api.inject.guice.GuiceApplicationLoader.load(GuiceApplicationLoader.scala:21)
+	at play.core.server.DevServerStart$$anon$1.$anonfun$reload$2(DevServerStart.scala:193)
+	at play.utils.Threads$.withContextClassLoader(Threads.scala:22)
+	at play.core.server.DevServerStart$$anon$1.reload(DevServerStart.scala:185)
+	... 25 common frames omitted
+2022-03-29 23:49:53,280 [INFO] from play.api.http.EnabledFilters in play-dev-mode-akka.actor.default-dispatcher-23 - Enabled Filters (see <https://www.playframework.com/documentation/latest/Filters>):
 
     play.filters.csrf.CSRFFilter
     play.filters.headers.SecurityHeadersFilter
     play.filters.hosts.AllowedHostsFilter
 
-2022-03-20 15:22:23,113 [INFO] from play.api.Play in play-dev-mode-akka.actor.default-dispatcher-22 - Application started (Dev) (no global state)
-2022-03-20 15:22:23,126 [TRACE] from v1.products.ProductsActionBuilder in application-akka.actor.default-dispatcher-6 - invokeBlock: 
-2022-03-20 15:22:23,127 [TRACE] from v1.products.ProductsController in application-akka.actor.default-dispatcher-6 - index: 
-2022-03-20 15:22:23,133 [TRACE] from v1.products.ProductsRepositoryImpl in application-repository.dispatcher-7 - list: 
-2022-03-20 15:28:09,866 [TRACE] from v1.products.ProductsActionBuilder in application-akka.actor.default-dispatcher-6 - invokeBlock: 
-2022-03-20 15:28:09,866 [TRACE] from v1.products.ProductsController in application-akka.actor.default-dispatcher-6 - index: 
-2022-03-20 15:28:09,867 [TRACE] from v1.products.ProductsRepositoryImpl in application-repository.dispatcher-9 - list: 
-2022-03-20 15:28:14,961 [TRACE] from v1.products.ProductsActionBuilder in application-akka.actor.default-dispatcher-6 - invokeBlock: 
-2022-03-20 15:28:14,962 [TRACE] from v1.products.ProductsController in application-akka.actor.default-dispatcher-6 - show: id = 1
-2022-03-20 15:28:14,985 [TRACE] from v1.products.ProductsRepositoryImpl in application-repository.dispatcher-10 - get: id = 1
-2022-03-20 15:28:18,058 [TRACE] from v1.products.ProductsActionBuilder in application-akka.actor.default-dispatcher-6 - invokeBlock: 
-2022-03-20 15:28:18,059 [TRACE] from v1.products.ProductsController in application-akka.actor.default-dispatcher-6 - show: id = 2
-2022-03-20 15:28:18,059 [TRACE] from v1.products.ProductsRepositoryImpl in application-repository.dispatcher-11 - get: id = 2
-2022-03-20 15:30:46,324 [DEBUG] from application.ErrorHandler in application-akka.actor.default-dispatcher-6 - onClientError: statusCode = 404, uri = /v1/products/2/, message = 
-2022-03-20 15:30:57,944 [WARN] from play.api.mvc.PlayBodyParsers in application-akka.actor.default-dispatcher-6 - Text body parser tried to parse request 12 as text body with charset US-ASCII, but it contains invalid characters!
-2022-03-20 15:30:57,947 [TRACE] from v1.products.ProductsActionBuilder in application-akka.actor.default-dispatcher-6 - invokeBlock: 
-2022-03-20 15:30:57,949 [TRACE] from v1.products.ProductsController in application-akka.actor.default-dispatcher-6 - process: 
-2022-03-20 15:31:34,900 [INFO] from play.api.http.EnabledFilters in play-dev-mode-akka.actor.default-dispatcher-28 - Enabled Filters (see <https://www.playframework.com/documentation/latest/Filters>):
+2022-03-29 23:49:53,283 [INFO] from play.api.Play in play-dev-mode-akka.actor.default-dispatcher-23 - Application started (Dev) (no global state)
+2022-03-29 23:49:53,289 [TRACE] from v1.category.CategoryActionBuilder in application-akka.actor.default-dispatcher-5 - invokeBlock: 
+2022-03-29 23:49:53,290 [TRACE] from v1.category.CategoryController in application-akka.actor.default-dispatcher-5 - index: 
+2022-03-29 23:49:53,300 [TRACE] from v1.category.CategoryRepositoryImpl in application-repository.dispatcher-6 - list: 
+2022-03-29 23:50:00,201 [TRACE] from v1.category.CategoryActionBuilder in application-akka.actor.default-dispatcher-7 - invokeBlock: 
+2022-03-29 23:50:00,205 [TRACE] from v1.category.CategoryController in application-akka.actor.default-dispatcher-7 - show: id = 3
+2022-03-29 23:50:00,212 [TRACE] from v1.category.CategoryRepositoryImpl in application-repository.dispatcher-8 - get: id = 3
+2022-03-29 23:50:12,820 [TRACE] from v1.category.CategoryActionBuilder in application-akka.actor.default-dispatcher-7 - invokeBlock: 
+2022-03-29 23:50:12,822 [TRACE] from v1.category.CategoryController in application-akka.actor.default-dispatcher-7 - process: 
+2022-03-29 23:50:22,384 [DEBUG] from application.ErrorHandler in application-akka.actor.default-dispatcher-7 - onClientError: statusCode = 400, uri = /v1/category, message = Invalid Json: Unexpected character ('n' (code 110)): was expecting double-quote to start field name
+ at [Source: (akka.util.ByteIterator$ByteArrayIterator$$anon$1); line: 2, column: 6]
+2022-03-29 23:50:27,197 [TRACE] from v1.category.CategoryActionBuilder in application-akka.actor.default-dispatcher-7 - invokeBlock: 
+2022-03-29 23:50:27,198 [TRACE] from v1.category.CategoryController in application-akka.actor.default-dispatcher-7 - process: 
+2022-03-29 23:50:52,555 [TRACE] from v1.category.CategoryActionBuilder in application-akka.actor.default-dispatcher-7 - invokeBlock: 
+2022-03-29 23:50:52,555 [TRACE] from v1.category.CategoryController in application-akka.actor.default-dispatcher-7 - process: 
+2022-03-29 23:50:52,563 [TRACE] from v1.category.CategoryRepositoryImpl in application-repository.dispatcher-9 - create: data = CategoryData(999,bread)
+2022-03-30 00:08:06,268 [ERROR] from play.api.http.DefaultHttpErrorHandler in play-dev-mode-akka.actor.default-dispatcher-35 - 
+
+! @7n6i729pn - Internal server error, for (POST) [/v1/card] ->
+ 
+play.sbt.PlayExceptions$CompilationException: Compilation error[object post is not a member of package v1]
+	at play.sbt.PlayExceptions$CompilationException$.apply(PlayExceptions.scala:34)
+	at play.sbt.PlayExceptions$CompilationException$.apply(PlayExceptions.scala:34)
+	at scala.Option.map(Option.scala:230)
+	at play.sbt.run.PlayReload$.$anonfun$taskFailureHandler$8(PlayReload.scala:131)
+	at scala.Option.map(Option.scala:230)
+	at play.sbt.run.PlayReload$.taskFailureHandler(PlayReload.scala:104)
+	at play.sbt.run.PlayReload$.compileFailure(PlayReload.scala:38)
+	at play.sbt.run.PlayReload$.$anonfun$compile$3(PlayReload.scala:156)
+	at scala.util.Either$LeftProjection.map(Either.scala:573)
+	at play.sbt.run.PlayReload$.compile(PlayReload.scala:156)
+	at play.sbt.run.PlayRun$.$anonfun$playRunTask$4(PlayRun.scala:80)
+	at play.runsupport.Reloader.$anonfun$reload$1(Reloader.scala:496)
+	at play.runsupport.Reloader$$anon$1.run(Reloader.scala:57)
+	at java.base/java.security.AccessController.doPrivileged(Native Method)
+	at play.runsupport.Reloader$.play$runsupport$Reloader$$withReloaderContextClassLoader(Reloader.scala:63)
+	at play.runsupport.Reloader.reload(Reloader.scala:496)
+	at play.core.server.DevServerStart$$anon$1.get(DevServerStart.scala:147)
+	at play.core.server.AkkaHttpServer.handleRequest(AkkaHttpServer.scala:302)
+	at play.core.server.AkkaHttpServer.$anonfun$createServerBinding$1(AkkaHttpServer.scala:224)
+	at akka.stream.impl.fusing.MapAsync$$anon$30.onPush(Ops.scala:1307)
+	at akka.stream.impl.fusing.GraphInterpreter.processPush(GraphInterpreter.scala:542)
+	at akka.stream.impl.fusing.GraphInterpreter.processEvent(GraphInterpreter.scala:496)
+	at akka.stream.impl.fusing.GraphInterpreter.execute(GraphInterpreter.scala:390)
+	at akka.stream.impl.fusing.GraphInterpreterShell.runBatch(ActorGraphInterpreter.scala:650)
+	at akka.stream.impl.fusing.GraphInterpreterShell$AsyncInput.execute(ActorGraphInterpreter.scala:521)
+	at akka.stream.impl.fusing.GraphInterpreterShell.processEvent(ActorGraphInterpreter.scala:625)
+	at akka.stream.impl.fusing.ActorGraphInterpreter.akka$stream$impl$fusing$ActorGraphInterpreter$$processEvent(ActorGraphInterpreter.scala:800)
+	at akka.stream.impl.fusing.ActorGraphInterpreter$$anonfun$receive$1.applyOrElse(ActorGraphInterpreter.scala:818)
+	at akka.actor.Actor.aroundReceive(Actor.scala:537)
+	at akka.actor.Actor.aroundReceive$(Actor.scala:535)
+	at akka.stream.impl.fusing.ActorGraphInterpreter.aroundReceive(ActorGraphInterpreter.scala:716)
+	at akka.actor.ActorCell.receiveMessage(ActorCell.scala:580)
+	at akka.actor.ActorCell.invoke(ActorCell.scala:548)
+	at akka.dispatch.Mailbox.processMailbox(Mailbox.scala:270)
+	at akka.dispatch.Mailbox.run(Mailbox.scala:231)
+	at akka.dispatch.Mailbox.exec(Mailbox.scala:243)
+	at java.base/java.util.concurrent.ForkJoinTask.doExec(ForkJoinTask.java:290)
+	at java.base/java.util.concurrent.ForkJoinPool$WorkQueue.topLevelExec(ForkJoinPool.java:1020)
+	at java.base/java.util.concurrent.ForkJoinPool.scan(ForkJoinPool.java:1656)
+	at java.base/java.util.concurrent.ForkJoinPool.runWorker(ForkJoinPool.java:1594)
+	at java.base/java.util.concurrent.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:183)
+2022-03-30 00:08:09,196 [ERROR] from play.api.http.DefaultHttpErrorHandler in play-dev-mode-akka.actor.default-dispatcher-35 - 
+
+! @7n6i72e99 - Internal server error, for (GET) [/v1/card] ->
+ 
+play.sbt.PlayExceptions$CompilationException: Compilation error[object post is not a member of package v1]
+	at play.sbt.PlayExceptions$CompilationException$.apply(PlayExceptions.scala:34)
+	at play.sbt.PlayExceptions$CompilationException$.apply(PlayExceptions.scala:34)
+	at scala.Option.map(Option.scala:230)
+	at play.sbt.run.PlayReload$.$anonfun$taskFailureHandler$8(PlayReload.scala:131)
+	at scala.Option.map(Option.scala:230)
+	at play.sbt.run.PlayReload$.taskFailureHandler(PlayReload.scala:104)
+	at play.sbt.run.PlayReload$.compileFailure(PlayReload.scala:38)
+	at play.sbt.run.PlayReload$.$anonfun$compile$3(PlayReload.scala:156)
+	at scala.util.Either$LeftProjection.map(Either.scala:573)
+	at play.sbt.run.PlayReload$.compile(PlayReload.scala:156)
+	at play.sbt.run.PlayRun$.$anonfun$playRunTask$4(PlayRun.scala:80)
+	at play.runsupport.Reloader.$anonfun$reload$1(Reloader.scala:496)
+	at play.runsupport.Reloader$$anon$1.run(Reloader.scala:57)
+	at java.base/java.security.AccessController.doPrivileged(Native Method)
+	at play.runsupport.Reloader$.play$runsupport$Reloader$$withReloaderContextClassLoader(Reloader.scala:63)
+	at play.runsupport.Reloader.reload(Reloader.scala:496)
+	at play.core.server.DevServerStart$$anon$1.get(DevServerStart.scala:147)
+	at play.core.server.AkkaHttpServer.handleRequest(AkkaHttpServer.scala:302)
+	at play.core.server.AkkaHttpServer.$anonfun$createServerBinding$1(AkkaHttpServer.scala:224)
+	at akka.stream.impl.fusing.MapAsync$$anon$30.onPush(Ops.scala:1307)
+	at akka.stream.impl.fusing.GraphInterpreter.processPush(GraphInterpreter.scala:542)
+	at akka.stream.impl.fusing.GraphInterpreter.processEvent(GraphInterpreter.scala:496)
+	at akka.stream.impl.fusing.GraphInterpreter.execute(GraphInterpreter.scala:390)
+	at akka.stream.impl.fusing.GraphInterpreterShell.runBatch(ActorGraphInterpreter.scala:650)
+	at akka.stream.impl.fusing.GraphInterpreterShell$AsyncInput.execute(ActorGraphInterpreter.scala:521)
+	at akka.stream.impl.fusing.GraphInterpreterShell.processEvent(ActorGraphInterpreter.scala:625)
+	at akka.stream.impl.fusing.ActorGraphInterpreter.akka$stream$impl$fusing$ActorGraphInterpreter$$processEvent(ActorGraphInterpreter.scala:800)
+	at akka.stream.impl.fusing.ActorGraphInterpreter$$anonfun$receive$1.applyOrElse(ActorGraphInterpreter.scala:818)
+	at akka.actor.Actor.aroundReceive(Actor.scala:537)
+	at akka.actor.Actor.aroundReceive$(Actor.scala:535)
+	at akka.stream.impl.fusing.ActorGraphInterpreter.aroundReceive(ActorGraphInterpreter.scala:716)
+	at akka.actor.ActorCell.receiveMessage(ActorCell.scala:580)
+	at akka.actor.ActorCell.invoke(ActorCell.scala:548)
+	at akka.dispatch.Mailbox.processMailbox(Mailbox.scala:270)
+	at akka.dispatch.Mailbox.run(Mailbox.scala:231)
+	at akka.dispatch.Mailbox.exec(Mailbox.scala:243)
+	at java.base/java.util.concurrent.ForkJoinTask.doExec(ForkJoinTask.java:290)
+	at java.base/java.util.concurrent.ForkJoinPool$WorkQueue.topLevelExec(ForkJoinPool.java:1020)
+	at java.base/java.util.concurrent.ForkJoinPool.scan(ForkJoinPool.java:1656)
+	at java.base/java.util.concurrent.ForkJoinPool.runWorker(ForkJoinPool.java:1594)
+	at java.base/java.util.concurrent.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:183)
+2022-03-30 00:10:19,928 [ERROR] from play.api.http.DefaultHttpErrorHandler in play-dev-mode-akka.actor.default-dispatcher-31 - 
+
+! @7n6i79pje - Internal server error, for (GET) [/v1/card] ->
+ 
+play.sbt.PlayExceptions$CompilationException: Compilation error[not found: value ShoppingCardFormInput]
+	at play.sbt.PlayExceptions$CompilationException$.apply(PlayExceptions.scala:34)
+	at play.sbt.PlayExceptions$CompilationException$.apply(PlayExceptions.scala:34)
+	at scala.Option.map(Option.scala:230)
+	at play.sbt.run.PlayReload$.$anonfun$taskFailureHandler$8(PlayReload.scala:131)
+	at scala.Option.map(Option.scala:230)
+	at play.sbt.run.PlayReload$.taskFailureHandler(PlayReload.scala:104)
+	at play.sbt.run.PlayReload$.compileFailure(PlayReload.scala:38)
+	at play.sbt.run.PlayReload$.$anonfun$compile$3(PlayReload.scala:156)
+	at scala.util.Either$LeftProjection.map(Either.scala:573)
+	at play.sbt.run.PlayReload$.compile(PlayReload.scala:156)
+	at play.sbt.run.PlayRun$.$anonfun$playRunTask$4(PlayRun.scala:80)
+	at play.runsupport.Reloader.$anonfun$reload$1(Reloader.scala:496)
+	at play.runsupport.Reloader$$anon$1.run(Reloader.scala:57)
+	at java.base/java.security.AccessController.doPrivileged(Native Method)
+	at play.runsupport.Reloader$.play$runsupport$Reloader$$withReloaderContextClassLoader(Reloader.scala:63)
+	at play.runsupport.Reloader.reload(Reloader.scala:496)
+	at play.core.server.DevServerStart$$anon$1.get(DevServerStart.scala:147)
+	at play.core.server.AkkaHttpServer.handleRequest(AkkaHttpServer.scala:302)
+	at play.core.server.AkkaHttpServer.$anonfun$createServerBinding$1(AkkaHttpServer.scala:224)
+	at akka.stream.impl.fusing.MapAsync$$anon$30.onPush(Ops.scala:1307)
+	at akka.stream.impl.fusing.GraphInterpreter.processPush(GraphInterpreter.scala:542)
+	at akka.stream.impl.fusing.GraphInterpreter.processEvent(GraphInterpreter.scala:496)
+	at akka.stream.impl.fusing.GraphInterpreter.execute(GraphInterpreter.scala:390)
+	at akka.stream.impl.fusing.GraphInterpreterShell.runBatch(ActorGraphInterpreter.scala:650)
+	at akka.stream.impl.fusing.GraphInterpreterShell$AsyncInput.execute(ActorGraphInterpreter.scala:521)
+	at akka.stream.impl.fusing.GraphInterpreterShell.processEvent(ActorGraphInterpreter.scala:625)
+	at akka.stream.impl.fusing.ActorGraphInterpreter.akka$stream$impl$fusing$ActorGraphInterpreter$$processEvent(ActorGraphInterpreter.scala:800)
+	at akka.stream.impl.fusing.ActorGraphInterpreter$$anonfun$receive$1.applyOrElse(ActorGraphInterpreter.scala:818)
+	at akka.actor.Actor.aroundReceive(Actor.scala:537)
+	at akka.actor.Actor.aroundReceive$(Actor.scala:535)
+	at akka.stream.impl.fusing.ActorGraphInterpreter.aroundReceive(ActorGraphInterpreter.scala:716)
+	at akka.actor.ActorCell.receiveMessage(ActorCell.scala:580)
+	at akka.actor.ActorCell.invoke(ActorCell.scala:548)
+	at akka.dispatch.Mailbox.processMailbox(Mailbox.scala:270)
+	at akka.dispatch.Mailbox.run(Mailbox.scala:231)
+	at akka.dispatch.Mailbox.exec(Mailbox.scala:243)
+	at java.base/java.util.concurrent.ForkJoinTask.doExec(ForkJoinTask.java:290)
+	at java.base/java.util.concurrent.ForkJoinPool$WorkQueue.topLevelExec(ForkJoinPool.java:1020)
+	at java.base/java.util.concurrent.ForkJoinPool.scan(ForkJoinPool.java:1656)
+	at java.base/java.util.concurrent.ForkJoinPool.runWorker(ForkJoinPool.java:1594)
+	at java.base/java.util.concurrent.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:183)
+2022-03-30 00:11:22,008 [ERROR] from play.api.http.DefaultHttpErrorHandler in play-dev-mode-akka.actor.default-dispatcher-32 - 
+
+! @7n6i7ddf6 - Internal server error, for (GET) [/v1/card] ->
+ 
+play.sbt.PlayExceptions$CompilationException: Compilation error[not found: type PostFormInput]
+	at play.sbt.PlayExceptions$CompilationException$.apply(PlayExceptions.scala:34)
+	at play.sbt.PlayExceptions$CompilationException$.apply(PlayExceptions.scala:34)
+	at scala.Option.map(Option.scala:230)
+	at play.sbt.run.PlayReload$.$anonfun$taskFailureHandler$8(PlayReload.scala:131)
+	at scala.Option.map(Option.scala:230)
+	at play.sbt.run.PlayReload$.taskFailureHandler(PlayReload.scala:104)
+	at play.sbt.run.PlayReload$.compileFailure(PlayReload.scala:38)
+	at play.sbt.run.PlayReload$.$anonfun$compile$3(PlayReload.scala:156)
+	at scala.util.Either$LeftProjection.map(Either.scala:573)
+	at play.sbt.run.PlayReload$.compile(PlayReload.scala:156)
+	at play.sbt.run.PlayRun$.$anonfun$playRunTask$4(PlayRun.scala:80)
+	at play.runsupport.Reloader.$anonfun$reload$1(Reloader.scala:496)
+	at play.runsupport.Reloader$$anon$1.run(Reloader.scala:57)
+	at java.base/java.security.AccessController.doPrivileged(Native Method)
+	at play.runsupport.Reloader$.play$runsupport$Reloader$$withReloaderContextClassLoader(Reloader.scala:63)
+	at play.runsupport.Reloader.reload(Reloader.scala:496)
+	at play.core.server.DevServerStart$$anon$1.get(DevServerStart.scala:147)
+	at play.core.server.AkkaHttpServer.handleRequest(AkkaHttpServer.scala:302)
+	at play.core.server.AkkaHttpServer.$anonfun$createServerBinding$1(AkkaHttpServer.scala:224)
+	at akka.stream.impl.fusing.MapAsync$$anon$30.onPush(Ops.scala:1307)
+	at akka.stream.impl.fusing.GraphInterpreter.processPush(GraphInterpreter.scala:542)
+	at akka.stream.impl.fusing.GraphInterpreter.processEvent(GraphInterpreter.scala:496)
+	at akka.stream.impl.fusing.GraphInterpreter.execute(GraphInterpreter.scala:390)
+	at akka.stream.impl.fusing.GraphInterpreterShell.runBatch(ActorGraphInterpreter.scala:650)
+	at akka.stream.impl.fusing.GraphInterpreterShell$AsyncInput.execute(ActorGraphInterpreter.scala:521)
+	at akka.stream.impl.fusing.GraphInterpreterShell.processEvent(ActorGraphInterpreter.scala:625)
+	at akka.stream.impl.fusing.ActorGraphInterpreter.akka$stream$impl$fusing$ActorGraphInterpreter$$processEvent(ActorGraphInterpreter.scala:800)
+	at akka.stream.impl.fusing.ActorGraphInterpreter$$anonfun$receive$1.applyOrElse(ActorGraphInterpreter.scala:818)
+	at akka.actor.Actor.aroundReceive(Actor.scala:537)
+	at akka.actor.Actor.aroundReceive$(Actor.scala:535)
+	at akka.stream.impl.fusing.ActorGraphInterpreter.aroundReceive(ActorGraphInterpreter.scala:716)
+	at akka.actor.ActorCell.receiveMessage(ActorCell.scala:580)
+	at akka.actor.ActorCell.invoke(ActorCell.scala:548)
+	at akka.dispatch.Mailbox.processMailbox(Mailbox.scala:270)
+	at akka.dispatch.Mailbox.run(Mailbox.scala:231)
+	at akka.dispatch.Mailbox.exec(Mailbox.scala:243)
+	at java.base/java.util.concurrent.ForkJoinTask.doExec(ForkJoinTask.java:290)
+	at java.base/java.util.concurrent.ForkJoinPool$WorkQueue.topLevelExec(ForkJoinPool.java:1020)
+	at java.base/java.util.concurrent.ForkJoinPool.scan(ForkJoinPool.java:1656)
+	at java.base/java.util.concurrent.ForkJoinPool.runWorker(ForkJoinPool.java:1594)
+	at java.base/java.util.concurrent.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:183)
+2022-03-30 00:11:52,671 [ERROR] from play.api.http.DefaultHttpErrorHandler in play-dev-mode-akka.actor.default-dispatcher-31 - 
+
+! @7n6i7f6of - Internal server error, for (GET) [/v1/card] ->
+ 
+play.sbt.PlayExceptions$CompilationException: Compilation error[type ShoppingCard is not a member of package v1.shoppingCard
+did you mean ShoppingCardId?]
+	at play.sbt.PlayExceptions$CompilationException$.apply(PlayExceptions.scala:34)
+	at play.sbt.PlayExceptions$CompilationException$.apply(PlayExceptions.scala:34)
+	at scala.Option.map(Option.scala:230)
+	at play.sbt.run.PlayReload$.$anonfun$taskFailureHandler$8(PlayReload.scala:131)
+	at scala.Option.map(Option.scala:230)
+	at play.sbt.run.PlayReload$.taskFailureHandler(PlayReload.scala:104)
+	at play.sbt.run.PlayReload$.compileFailure(PlayReload.scala:38)
+	at play.sbt.run.PlayReload$.$anonfun$compile$3(PlayReload.scala:156)
+	at scala.util.Either$LeftProjection.map(Either.scala:573)
+	at play.sbt.run.PlayReload$.compile(PlayReload.scala:156)
+	at play.sbt.run.PlayRun$.$anonfun$playRunTask$4(PlayRun.scala:80)
+	at play.runsupport.Reloader.$anonfun$reload$1(Reloader.scala:496)
+	at play.runsupport.Reloader$$anon$1.run(Reloader.scala:57)
+	at java.base/java.security.AccessController.doPrivileged(Native Method)
+	at play.runsupport.Reloader$.play$runsupport$Reloader$$withReloaderContextClassLoader(Reloader.scala:63)
+	at play.runsupport.Reloader.reload(Reloader.scala:496)
+	at play.core.server.DevServerStart$$anon$1.get(DevServerStart.scala:147)
+	at play.core.server.AkkaHttpServer.handleRequest(AkkaHttpServer.scala:302)
+	at play.core.server.AkkaHttpServer.$anonfun$createServerBinding$1(AkkaHttpServer.scala:224)
+	at akka.stream.impl.fusing.MapAsync$$anon$30.onPush(Ops.scala:1307)
+	at akka.stream.impl.fusing.GraphInterpreter.processPush(GraphInterpreter.scala:542)
+	at akka.stream.impl.fusing.GraphInterpreter.processEvent(GraphInterpreter.scala:496)
+	at akka.stream.impl.fusing.GraphInterpreter.execute(GraphInterpreter.scala:390)
+	at akka.stream.impl.fusing.GraphInterpreterShell.runBatch(ActorGraphInterpreter.scala:650)
+	at akka.stream.impl.fusing.GraphInterpreterShell$AsyncInput.execute(ActorGraphInterpreter.scala:521)
+	at akka.stream.impl.fusing.GraphInterpreterShell.processEvent(ActorGraphInterpreter.scala:625)
+	at akka.stream.impl.fusing.ActorGraphInterpreter.akka$stream$impl$fusing$ActorGraphInterpreter$$processEvent(ActorGraphInterpreter.scala:800)
+	at akka.stream.impl.fusing.ActorGraphInterpreter$$anonfun$receive$1.applyOrElse(ActorGraphInterpreter.scala:818)
+	at akka.actor.Actor.aroundReceive(Actor.scala:537)
+	at akka.actor.Actor.aroundReceive$(Actor.scala:535)
+	at akka.stream.impl.fusing.ActorGraphInterpreter.aroundReceive(ActorGraphInterpreter.scala:716)
+	at akka.actor.ActorCell.receiveMessage(ActorCell.scala:580)
+	at akka.actor.ActorCell.invoke(ActorCell.scala:548)
+	at akka.dispatch.Mailbox.processMailbox(Mailbox.scala:270)
+	at akka.dispatch.Mailbox.run(Mailbox.scala:231)
+	at akka.dispatch.Mailbox.exec(Mailbox.scala:243)
+	at java.base/java.util.concurrent.ForkJoinTask.doExec(ForkJoinTask.java:290)
+	at java.base/java.util.concurrent.ForkJoinPool$WorkQueue.topLevelExec(ForkJoinPool.java:1020)
+	at java.base/java.util.concurrent.ForkJoinPool.scan(ForkJoinPool.java:1656)
+	at java.base/java.util.concurrent.ForkJoinPool.runWorker(ForkJoinPool.java:1594)
+	at java.base/java.util.concurrent.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:183)
+2022-03-30 00:12:16,019 [INFO] from play.api.http.EnabledFilters in play-dev-mode-akka.actor.default-dispatcher-32 - Enabled Filters (see <https://www.playframework.com/documentation/latest/Filters>):
 
     play.filters.csrf.CSRFFilter
     play.filters.headers.SecurityHeadersFilter
     play.filters.hosts.AllowedHostsFilter
 
-2022-03-20 15:31:34,904 [INFO] from play.api.Play in play-dev-mode-akka.actor.default-dispatcher-28 - Application started (Dev) (no global state)
-2022-03-20 15:31:34,910 [WARN] from play.api.mvc.PlayBodyParsers in application-akka.actor.default-dispatcher-6 - Text body parser tried to parse request 13 as text body with charset US-ASCII, but it contains invalid characters!
-2022-03-20 15:31:34,911 [TRACE] from v1.products.ProductsActionBuilder in application-akka.actor.default-dispatcher-6 - invokeBlock: 
-2022-03-20 15:31:34,912 [TRACE] from v1.products.ProductsController in application-akka.actor.default-dispatcher-6 - process: 
-2022-03-20 15:37:42,823 [WARN] from play.api.mvc.PlayBodyParsers in application-akka.actor.default-dispatcher-6 - Text body parser tried to parse request 14 as text body with charset US-ASCII, but it contains invalid characters!
-2022-03-20 15:37:42,823 [TRACE] from v1.products.ProductsActionBuilder in application-akka.actor.default-dispatcher-6 - invokeBlock: 
-2022-03-20 15:37:42,823 [TRACE] from v1.products.ProductsController in application-akka.actor.default-dispatcher-6 - process: 
-2022-03-20 15:39:54,804 [WARN] from play.api.mvc.PlayBodyParsers in application-akka.actor.default-dispatcher-6 - Text body parser tried to parse request 15 as text body with charset US-ASCII, but it contains invalid characters!
-2022-03-20 15:39:54,805 [TRACE] from v1.products.ProductsActionBuilder in application-akka.actor.default-dispatcher-6 - invokeBlock: 
-2022-03-20 15:39:54,805 [TRACE] from v1.products.ProductsController in application-akka.actor.default-dispatcher-6 - process: 
-2022-03-20 15:42:17,980 [DEBUG] from application.ErrorHandler in application-akka.actor.default-dispatcher-6 - onClientError: statusCode = 404, uri = /v1/post, message = 
-2022-03-20 15:42:28,243 [DEBUG] from application.ErrorHandler in application-akka.actor.default-dispatcher-6 - onClientError: statusCode = 404, uri = /v1/post, message = 
-2022-03-20 15:42:38,123 [DEBUG] from application.ErrorHandler in application-akka.actor.default-dispatcher-6 - onClientError: statusCode = 404, uri = /v1/post, message = 
-2022-03-20 15:42:56,373 [DEBUG] from application.ErrorHandler in application-akka.actor.default-dispatcher-6 - onClientError: statusCode = 404, uri = /v1/post, message = 
-2022-03-20 15:43:21,339 [WARN] from play.api.mvc.PlayBodyParsers in application-akka.actor.default-dispatcher-6 - Text body parser tried to parse request 20 as text body with charset US-ASCII, but it contains invalid characters!
-2022-03-20 15:43:21,340 [TRACE] from v1.post.PostActionBuilder in application-akka.actor.default-dispatcher-6 - invokeBlock: 
-2022-03-20 15:43:21,342 [TRACE] from v1.post.PostController in application-akka.actor.default-dispatcher-6 - index: 
-2022-03-20 15:43:21,345 [TRACE] from v1.post.PostRepositoryImpl in application-repository.dispatcher-7 - list: 
-2022-03-20 15:43:26,072 [WARN] from play.api.mvc.PlayBodyParsers in application-akka.actor.default-dispatcher-6 - Text body parser tried to parse request 21 as text body with charset US-ASCII, but it contains invalid characters!
-2022-03-20 15:43:26,073 [TRACE] from v1.post.PostActionBuilder in application-akka.actor.default-dispatcher-6 - invokeBlock: 
-2022-03-20 15:43:26,074 [TRACE] from v1.post.PostController in application-akka.actor.default-dispatcher-6 - process: 
-2022-03-20 15:43:37,802 [WARN] from play.api.mvc.PlayBodyParsers in application-akka.actor.default-dispatcher-6 - Text body parser tried to parse request 22 as text body with charset US-ASCII, but it contains invalid characters!
-2022-03-20 15:43:37,802 [TRACE] from v1.post.PostActionBuilder in application-akka.actor.default-dispatcher-6 - invokeBlock: 
-2022-03-20 15:43:37,802 [TRACE] from v1.post.PostController in application-akka.actor.default-dispatcher-6 - process: 
-2022-03-20 15:43:40,589 [WARN] from play.api.mvc.PlayBodyParsers in application-akka.actor.default-dispatcher-6 - Text body parser tried to parse request 23 as text body with charset US-ASCII, but it contains invalid characters!
-2022-03-20 15:43:40,589 [TRACE] from v1.post.PostActionBuilder in application-akka.actor.default-dispatcher-6 - invokeBlock: 
-2022-03-20 15:43:40,589 [TRACE] from v1.post.PostController in application-akka.actor.default-dispatcher-6 - process: 
-2022-03-20 15:43:44,262 [WARN] from play.api.mvc.PlayBodyParsers in application-akka.actor.default-dispatcher-6 - Text body parser tried to parse request 24 as text body with charset US-ASCII, but it contains invalid characters!
-2022-03-20 15:43:44,262 [TRACE] from v1.post.PostActionBuilder in application-akka.actor.default-dispatcher-6 - invokeBlock: 
-2022-03-20 15:43:44,262 [TRACE] from v1.post.PostController in application-akka.actor.default-dispatcher-6 - process: 
-2022-03-20 15:43:53,969 [TRACE] from v1.post.PostActionBuilder in application-akka.actor.default-dispatcher-6 - invokeBlock: 
-2022-03-20 15:43:53,970 [TRACE] from v1.post.PostController in application-akka.actor.default-dispatcher-6 - process: 
-2022-03-20 15:43:54,001 [TRACE] from v1.post.PostRepositoryImpl in application-repository.dispatcher-9 - create: data = PostData(999,Pear,2 zł)
-2022-03-20 15:44:04,424 [TRACE] from v1.products.ProductsActionBuilder in application-akka.actor.default-dispatcher-6 - invokeBlock: 
-2022-03-20 15:44:04,424 [TRACE] from v1.products.ProductsController in application-akka.actor.default-dispatcher-6 - process: 
-2022-03-20 15:44:21,941 [TRACE] from v1.products.ProductsActionBuilder in application-akka.actor.default-dispatcher-6 - invokeBlock: 
-2022-03-20 15:44:21,941 [TRACE] from v1.products.ProductsController in application-akka.actor.default-dispatcher-6 - process: 
-2022-03-20 15:44:21,972 [TRACE] from v1.products.ProductsRepositoryImpl in application-repository.dispatcher-10 - create: data = ProductData(999,Pear,2 zł,Fruit)
-2022-03-20 15:44:30,327 [TRACE] from v1.products.ProductsActionBuilder in application-akka.actor.default-dispatcher-6 - invokeBlock: 
-2022-03-20 15:44:30,328 [TRACE] from v1.products.ProductsController in application-akka.actor.default-dispatcher-6 - index: 
-2022-03-20 15:44:30,329 [TRACE] from v1.products.ProductsRepositoryImpl in application-repository.dispatcher-11 - list: 
+2022-03-30 00:12:16,023 [INFO] from play.api.Play in play-dev-mode-akka.actor.default-dispatcher-32 - Application started (Dev) (no global state)

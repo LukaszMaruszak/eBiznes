@@ -53,11 +53,15 @@
 
   <logger name="play" level="INFO" />
   <logger name="application" level="DEBUG" />
-  <logger name="v1.post" level="TRACE" />
+  <logger name="v1.card" level="TRACE" />
 
   <logger name="play" level="INFO" />
   <logger name="application" level="DEBUG" />
   <logger name="v1.products" level="TRACE" />
+
+  <logger name="play" level="INFO" />
+  <logger name="application" level="DEBUG" />
+  <logger name="v1.category" level="TRACE" />
 
   <root level="WARN">
     <appender-ref ref="ASYNCFILE" />

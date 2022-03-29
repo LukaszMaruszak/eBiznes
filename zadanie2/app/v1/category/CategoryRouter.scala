@@ -1,18 +1,18 @@
-package v1.post
-
-import javax.inject.Inject
+package v1.category
 
 import play.api.routing.Router.Routes
 import play.api.routing.SimpleRouter
 import play.api.routing.sird._
 
-/**
-  * Routes and URLs to the PostResource controller.
-  */
-class PostRouter @Inject()(controller: PostController) extends SimpleRouter {
-  val prefix = "/v1/posts"
+import javax.inject.Inject
 
-  def link(id: PostId): String = {
+/**
+  * Routes and URLs to the CategoriesRouter controller.
+  */
+class CategoryRouter @Inject()(controller: CategoryController) extends SimpleRouter {
+  val prefix = "/v1/category"
+
+  def link(id: CategoryId): String = {
     import io.lemonlabs.uri.dsl._
     val url = prefix / id.toString
     url.toString()

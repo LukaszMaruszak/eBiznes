@@ -1,2 +1,3 @@
-->         /v1/posts               v1.post.PostRouter
+->         /v1/card                v1.shoppingCard.ShoppingCardRouter
 ->         /v1/products            v1.products.ProductsRouter
+->         /v1/category            v1.category.CategoryRouter
