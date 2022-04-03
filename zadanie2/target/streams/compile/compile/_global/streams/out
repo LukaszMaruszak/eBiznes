@@ -1,0 +1,7 @@
+[0m[[0m[31merror[0m] [0m[0m/home/lukasz/ebiznes/eBiznes/zadanie2/app/v1/shoppingCard/ShoppingCardRepository.scala:39:73: not found: type CategoryData[0m
+[0m[[0m[31merror[0m] [0m[0m  def delete(id: CategoryId)(implicit mc: MarkerContext): Future[Option[CategoryData]][0m
+[0m[[0m[31merror[0m] [0m[0m                                                                        ^[0m
+[0m[[0m[31merror[0m] [0m[0m/home/lukasz/ebiznes/eBiznes/zadanie2/app/v1/shoppingCard/ShoppingCardRepository.scala:39:18: not found: type CategoryId[0m
+[0m[[0m[31merror[0m] [0m[0m  def delete(id: CategoryId)(implicit mc: MarkerContext): Future[Option[CategoryData]][0m
+[0m[[0m[31merror[0m] [0m[0m                 ^[0m
+[0m[[0m[31merror[0m] [0m[0mtwo errors found[0m
