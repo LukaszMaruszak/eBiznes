@@ -9,7 +9,7 @@ import play.api.mvc._
 
 import scala.concurrent.{ExecutionContext, Future}
 
-case class ShoppingCardFormInput(title: String, body: String)
+case class ShoppingCardFormInput(title: String, quantity: String, price: String)
 
 /**
   * Takes HTTP requests and produces JSON.
@@ -26,15 +26,17 @@ class ShoppingCardController @Inject()(cc: ShoppingCardControllerComponents)(
     Form(
       mapping(
         "title" -> nonEmptyText,
-        "body" -> text
+        "quantity" -> text,
+        "price" -> text,
+
       )(ShoppingCardFormInput.apply)(ShoppingCardFormInput.unapply)
     )
   }
 
   def index: Action[AnyContent] = ShoppingCardAction.async { implicit request =>
     logger.trace("index: ")
-    shoppingCardResourceHandler.find.map { posts =>
-      Ok(Json.toJson(posts))
+    shoppingCardResourceHandler.find.map { shoppingCard =>
+      Ok(Json.toJson(shoppingCard))
     }
   }
 
@@ -46,10 +48,25 @@ class ShoppingCardController @Inject()(cc: ShoppingCardControllerComponents)(
   def show(id: String): Action[AnyContent] = ShoppingCardAction.async {
     implicit request =>
       logger.trace(s"show: id = $id")
-      shoppingCardResourceHandler.lookup(id).map { post =>
-        Ok(Json.toJson(post))
+      shoppingCardResourceHandler.lookup(id).map { shoppingCard =>
+        Ok(Json.toJson(shoppingCard))
       }
   }
+
+  def delete(id: String): Action[AnyContent] = ShoppingCardAction.async {
+    implicit request =>
+      logger.trace(s"delete: id = $id")
+      shoppingCardResourceHandler.delete(id).map { card =>
+        Ok(Json.toJson(card))
+      }
+  }
+
+  def update(id: String): Action[AnyContent] = ShoppingCardAction.async {
+    implicit request =>
+      logger.trace(s"update: id = $id")
+      processJsonUpdate(id)
+  }
+
 
   private def processJsonPost[A]()(
       implicit request: ShoppingCardRequest[A]): Future[Result] = {
@@ -58,8 +75,24 @@ class ShoppingCardController @Inject()(cc: ShoppingCardControllerComponents)(
     }
 
     def success(input: ShoppingCardFormInput) = {
-      shoppingCardResourceHandler.create(input).map { post =>
-        Created(Json.toJson(post)).withHeaders(LOCATION -> post.link)
+      shoppingCardResourceHandler.create(input).map { shoppingCard =>
+        Created(Json.toJson(shoppingCard))
+      }
+    }
+
+    form.bindFromRequest().fold(failure, success)
+  }
+
+  private def processJsonUpdate[A](id: String)(
+    implicit request: ShoppingCardRequest[A]): Future[Result] = {
+
+    def failure(badForm: Form[ShoppingCardFormInput]) = {
+      Future.successful(BadRequest(badForm.errorsAsJson))
+    }
+
+    def success(input: ShoppingCardFormInput) = {
+      shoppingCardResourceHandler.update(id, input).map { category =>
+        Created(Json.toJson(category))
       }
     }
 

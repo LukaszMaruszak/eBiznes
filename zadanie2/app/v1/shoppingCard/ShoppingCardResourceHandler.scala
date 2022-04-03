@@ -10,7 +10,7 @@ import play.api.libs.json._
 /**
   * DTO for displaying post information.
   */
-case class ShoppingCardResource(id: String, link: String, title: String, body: String)
+case class ShoppingCardResource(id: String, title: String, quantity: String, price: String)
 
 object ShoppingCardResource {
   /**
@@ -24,21 +24,32 @@ object ShoppingCardResource {
   * Controls access to the backend data, returning [[ShoppingCardResource]]
   */
 class ShoppingCardResourceHandler @Inject()(
-    routerProvider: Provider[ShoppingCardRouter],
-    postRepository: ShoppingCardRepository)(implicit ec: ExecutionContext) {
+                                             routerProvider: Provider[ShoppingCardRouter],
+                                             shoppingCardRepository: ShoppingCardRepository)(implicit ec: ExecutionContext) {
 
-  def create(postInput: ShoppingCardFormInput)(
+  def create(shoppingCardInput: ShoppingCardFormInput)(
       implicit mc: MarkerContext): Future[ShoppingCardResource] = {
-    val data = ShoppingCardData(ShoppingCardId("999"), postInput.title, postInput.body)
-    // We don't actually create the post, so return what we have
-    postRepository.create(data).map { id =>
+    var index = shoppingCardRepository.size()
+
+    val data = ShoppingCardData(ShoppingCardId((index + 1).toString), shoppingCardInput.title, shoppingCardInput.quantity, shoppingCardInput.price)
+    shoppingCardRepository.create(data).map { id =>
       createPostResource(data)
     }
   }
 
   def lookup(id: String)(
       implicit mc: MarkerContext): Future[Option[ShoppingCardResource]] = {
-    val postFuture = postRepository.get(ShoppingCardId(id))
+    val postFuture = shoppingCardRepository.get(ShoppingCardId(id))
+    postFuture.map { maybePostData =>
+      maybePostData.map { postData =>
+        createPostResource(postData)
+      }
+    }
+  }
+
+  def delete(id: String)(
+    implicit mc: MarkerContext): Future[Option[ShoppingCardResource]] = {
+    val postFuture = shoppingCardRepository.delete(ShoppingCardId(id))
     postFuture.map { maybePostData =>
       maybePostData.map { postData =>
         createPostResource(postData)
@@ -47,13 +58,21 @@ class ShoppingCardResourceHandler @Inject()(
   }
 
   def find(implicit mc: MarkerContext): Future[Iterable[ShoppingCardResource]] = {
-    postRepository.list().map { postDataList =>
+    shoppingCardRepository.list().map { postDataList =>
       postDataList.map(postData => createPostResource(postData))
     }
   }
 
+  def update(id: String, shoppingCardFormInput: ShoppingCardFormInput)(
+    implicit mc: MarkerContext): Future[ShoppingCardResource] = {
+    val data = ShoppingCardData(ShoppingCardId(id), shoppingCardFormInput.title, shoppingCardFormInput.quantity, shoppingCardFormInput.price)
+    shoppingCardRepository.update(ShoppingCardId(id), data).map { id =>
+      createPostResource(data)
+    }
+  }
+
   private def createPostResource(p: ShoppingCardData): ShoppingCardResource = {
-    ShoppingCardResource(p.id.toString, routerProvider.get.link(p.id), p.title, p.body)
+    ShoppingCardResource(p.id.toString, p.title, p.quantity, p.price)
   }
 
 }

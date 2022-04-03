@@ -6,6 +6,7 @@ import play.api.{Logger, MarkerContext}
 
 import javax.inject.{Inject, Singleton}
 import scala.concurrent.Future
+import scala.collection.mutable.ListBuffer
 
 final case class CategoryData(id: CategoryId, name: String)
 
@@ -27,11 +28,17 @@ class CategoryExecutionContext @Inject()(actorSystem: ActorSystem)
   * A pure non-blocking interface for the CategoryRepository.
   */
 trait CategoryRepository {
+  def size()(implicit mc: MarkerContext): Int
+
   def create(data: CategoryData)(implicit mc: MarkerContext): Future[CategoryId]
 
   def list()(implicit mc: MarkerContext): Future[Iterable[CategoryData]]
 
   def get(id: CategoryId)(implicit mc: MarkerContext): Future[Option[CategoryData]]
+
+  def delete(id: CategoryId)(implicit mc: MarkerContext): Future[Option[CategoryData]]
+
+  def update(id: CategoryId, data: CategoryData)(implicit mc: MarkerContext): Future[Iterable[CategoryData]]
 }
 
 /**
@@ -47,11 +54,16 @@ class CategoryRepositoryImpl @Inject()()(implicit ec: CategoryExecutionContext)
 
   private val logger = Logger(this.getClass)
 
-  private val categoryList = List(
+  private val categoryList = ListBuffer(
     CategoryData(CategoryId("1"), "Fruits"),
     CategoryData(CategoryId("2"), "Vegetables"),
     CategoryData(CategoryId("3"), "Dairy"),
   )
+
+  override def size()(
+    implicit mc: MarkerContext): Int = {
+    categoryList.length
+  }
 
   override def list()(
       implicit mc: MarkerContext): Future[Iterable[CategoryData]] = {
@@ -65,15 +77,45 @@ class CategoryRepositoryImpl @Inject()()(implicit ec: CategoryExecutionContext)
       implicit mc: MarkerContext): Future[Option[CategoryData]] = {
     Future {
       logger.trace(s"get: id = $id")
-      categoryList.find(post => post.id == id)
+      categoryList.find(category => category.id == id)
     }
   }
 
-  def create(data: CategoryData)(implicit mc: MarkerContext): Future[CategoryId] = {
+  override def delete(id: CategoryId)(
+    implicit mc: MarkerContext): Future[Option[CategoryData]] = {
     Future {
-      logger.trace(s"create: data = $data")
+      logger.trace(s"delete: id = $id")
+      var elementIndex = categoryList.indexWhere(category => category.id == id).toInt
+      var removed: CategoryData = null
+      if(elementIndex != -1) {
+        removed = categoryList.remove(elementIndex)
+      }
+
+      Option(removed)
+    }
+  }
+
+  override def create(data: CategoryData)(implicit mc: MarkerContext): Future[CategoryId] = {
+    Future {
+      logger.trace(s"create category: data = $data")
+      categoryList += data
       data.id
     }
   }
 
+  override def update(id: CategoryId, data: CategoryData)( implicit mc: MarkerContext): Future[Iterable[CategoryData]] = {
+    logger.trace(s"id: id = $id")
+    logger.trace(s"update: data = $data")
+
+    Future {
+      var elementIndex = categoryList.indexWhere(category => category.id == id).toInt
+      if(elementIndex != -1) {
+        categoryList.update(elementIndex, data)
+      }
+      else {
+        categoryList += data
+      }
+      categoryList
+    }
+  }
 }

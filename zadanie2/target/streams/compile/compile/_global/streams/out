@@ -1,7 +1,7 @@
-[0m[[0m[31merror[0m] [0m[0m/home/lukasz/ebiznes/eBiznes/zadanie2/conf/routes:1:1: type ShoppingCard is not a member of package v1.shoppingCard[0m
-[0m[[0m[31merror[0m] [0m[0mdid you mean ShoppingCardId?[0m
-[0m[[0m[31merror[0m] [0m[0m->         /v1/card                v1.shoppingCard.ShoppingCard[0m
-[0m[[0m[31merror[0m] [0m[0m/home/lukasz/ebiznes/eBiznes/zadanie2/conf/routes:1:1: type ShoppingCard is not a member of package v1.shoppingCard[0m
-[0m[[0m[31merror[0m] [0m[0mdid you mean ShoppingCardId?[0m
-[0m[[0m[31merror[0m] [0m[0m->         /v1/card                v1.shoppingCard.ShoppingCard[0m
+[0m[[0m[31merror[0m] [0m[0m/home/lukasz/ebiznes/eBiznes/zadanie2/app/v1/shoppingCard/ShoppingCardRepository.scala:39:73: not found: type CategoryData[0m
+[0m[[0m[31merror[0m] [0m[0m  def delete(id: CategoryId)(implicit mc: MarkerContext): Future[Option[CategoryData]][0m
+[0m[[0m[31merror[0m] [0m[0m                                                                        ^[0m
+[0m[[0m[31merror[0m] [0m[0m/home/lukasz/ebiznes/eBiznes/zadanie2/app/v1/shoppingCard/ShoppingCardRepository.scala:39:18: not found: type CategoryId[0m
+[0m[[0m[31merror[0m] [0m[0m  def delete(id: CategoryId)(implicit mc: MarkerContext): Future[Option[CategoryData]][0m
+[0m[[0m[31merror[0m] [0m[0m                 ^[0m
 [0m[[0m[31merror[0m] [0m[0mtwo errors found[0m

@@ -44,9 +44,23 @@ class CategoryController @Inject()(cc: CategoryControllerComponents)(
   def show(id: String): Action[AnyContent] = CategoryAction.async {
     implicit request =>
       logger.trace(s"show: id = $id")
-      categoryResourceHandler.lookup(id).map { product =>
-        Ok(Json.toJson(product))
+      categoryResourceHandler.lookup(id).map { category =>
+        Ok(Json.toJson(category))
       }
+  }
+
+  def delete(id: String): Action[AnyContent] = CategoryAction.async {
+    implicit request =>
+      logger.trace(s"delete: id = $id")
+      categoryResourceHandler.delete(id).map { category =>
+        Ok(Json.toJson(category))
+      }
+  }
+
+  def update(id: String): Action[AnyContent] = CategoryAction.async {
+    implicit request =>
+      logger.trace(s"update: id = $id")
+      processJsonUpdate(id)
   }
 
   private def processJsonPost[A]()(
@@ -56,8 +70,24 @@ class CategoryController @Inject()(cc: CategoryControllerComponents)(
     }
 
     def success(input: CategoryFormInput) = {
-      categoryResourceHandler.create(input).map { product =>
-        Created(Json.toJson(product)).withHeaders(LOCATION -> product.name)
+      categoryResourceHandler.create(input).map { category =>
+        Created(Json.toJson(category)).withHeaders(LOCATION -> category.name)
+      }
+    }
+
+    form.bindFromRequest().fold(failure, success)
+  }
+
+  private def processJsonUpdate[A](id: String)(
+    implicit request: CategoryRequest[A]): Future[Result] = {
+
+    def failure(badForm: Form[CategoryFormInput]) = {
+      Future.successful(BadRequest(badForm.errorsAsJson))
+    }
+
+    def success(input: CategoryFormInput) = {
+      categoryResourceHandler.update(id, input).map { category =>
+        Created(Json.toJson(category))
       }
     }
 

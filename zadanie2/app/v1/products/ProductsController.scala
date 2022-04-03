@@ -51,6 +51,20 @@ class ProductsController @Inject()(cc: ProductControllerComponents)(
       }
   }
 
+  def delete(id: String): Action[AnyContent] = ProductsAction.async {
+    implicit request =>
+      logger.trace(s"delete: id = $id")
+      productsResourceHandler.delete(id).map { product =>
+        Ok(Json.toJson(product))
+      }
+  }
+
+  def update(id: String): Action[AnyContent] = ProductsAction.async {
+    implicit request =>
+      logger.trace(s"update: id = $id")
+      processJsonUpdate(id)
+  }
+
   private def processJsonPost[A]()(
       implicit request: ProductRequest[A]): Future[Result] = {
     def failure(badForm: Form[ProductsFormInput]) = {
@@ -60,6 +74,22 @@ class ProductsController @Inject()(cc: ProductControllerComponents)(
     def success(input: ProductsFormInput) = {
       productsResourceHandler.create(input).map { product =>
         Created(Json.toJson(product)).withHeaders(LOCATION -> product.link)
+      }
+    }
+
+    form.bindFromRequest().fold(failure, success)
+  }
+
+  private def processJsonUpdate[A](id: String)(
+    implicit request: ProductRequest[A]): Future[Result] = {
+
+    def failure(badForm: Form[ProductsFormInput]) = {
+      Future.successful(BadRequest(badForm.errorsAsJson))
+    }
+
+    def success(input: ProductsFormInput) = {
+      productsResourceHandler.update(id, input).map { category =>
+        Created(Json.toJson(category))
       }
     }
 

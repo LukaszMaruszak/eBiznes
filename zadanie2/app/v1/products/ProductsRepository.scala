@@ -6,6 +6,7 @@ import play.api.{Logger, MarkerContext}
 
 import javax.inject.{Inject, Singleton}
 import scala.concurrent.Future
+import scala.collection.mutable.ListBuffer
 
 final case class ProductData(id: ProductId, title: String, price: String, category: String)
 
@@ -27,11 +28,17 @@ class ProductsExecutionContext @Inject()(actorSystem: ActorSystem)
   * A pure non-blocking interface for the ProductsRepository.
   */
 trait ProductsRepository {
+  def size()(implicit mc: MarkerContext): Int
+
   def create(data: ProductData)(implicit mc: MarkerContext): Future[ProductId]
 
   def list()(implicit mc: MarkerContext): Future[Iterable[ProductData]]
 
   def get(id: ProductId)(implicit mc: MarkerContext): Future[Option[ProductData]]
+
+  def delete(id: ProductId)(implicit mc: MarkerContext): Future[Option[ProductData]]
+
+  def update(id: ProductId, data: ProductData)(implicit mc: MarkerContext): Future[Iterable[ProductData]]
 }
 
 /**
@@ -47,7 +54,7 @@ class ProductsRepositoryImpl @Inject()()(implicit ec: ProductsExecutionContext)
 
   private val logger = Logger(this.getClass)
 
-  private val postList = List(
+  private val productsList = ListBuffer(
     ProductData(ProductId("1"), "Banana", "5 zł", "Fruit"),
     ProductData(ProductId("2"), "Apple", "4 zł", "Fruit"),
     ProductData(ProductId("3"), "Orange", "10 zł", "Fruit"),
@@ -55,11 +62,16 @@ class ProductsRepositoryImpl @Inject()()(implicit ec: ProductsExecutionContext)
     ProductData(ProductId("5"), "Tomato", "6 zł", "Vegetable")
   )
 
+  override def size()(
+    implicit mc: MarkerContext): Int = {
+    productsList.length
+  }
+
   override def list()(
       implicit mc: MarkerContext): Future[Iterable[ProductData]] = {
     Future {
       logger.trace(s"list: ")
-      postList
+      productsList
     }
   }
 
@@ -67,15 +79,45 @@ class ProductsRepositoryImpl @Inject()()(implicit ec: ProductsExecutionContext)
       implicit mc: MarkerContext): Future[Option[ProductData]] = {
     Future {
       logger.trace(s"get: id = $id")
-      postList.find(post => post.id == id)
+      productsList.find(product => product.id == id)
+    }
+  }
+
+  override def delete(id: ProductId)(
+    implicit mc: MarkerContext): Future[Option[ProductData]] = {
+    Future {
+      logger.trace(s"delete: id = $id")
+      var elementIndex = productsList.indexWhere(category => category.id == id).toInt
+      var removed: ProductData = null
+      if(elementIndex != -1) {
+        removed = productsList.remove(elementIndex)
+      }
+
+      Option(removed)
     }
   }
 
   def create(data: ProductData)(implicit mc: MarkerContext): Future[ProductId] = {
     Future {
       logger.trace(s"create: data = $data")
+      productsList += data
       data.id
     }
   }
 
+  override def update(id: ProductId, data: ProductData)( implicit mc: MarkerContext): Future[Iterable[ProductData]] = {
+    logger.trace(s"id: id = $id")
+    logger.trace(s"update: data = $data")
+
+    Future {
+      var elementIndex = productsList.indexWhere(product => product.id == id).toInt
+      if(elementIndex != -1) {
+        productsList.update(elementIndex, data)
+      }
+      else {
+        productsList += data
+      }
+      productsList
+    }
+  }
 }

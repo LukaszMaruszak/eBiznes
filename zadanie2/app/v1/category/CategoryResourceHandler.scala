@@ -9,7 +9,7 @@ import scala.concurrent.{ExecutionContext, Future}
 /**
   * DTO for displaying category information.
   */
-case class CategoryResource(id: String, link: String, name: String)
+case class CategoryResource(id: String, name: String)
 
 object CategoryResource {
   /**
@@ -28,8 +28,9 @@ class CategoryResourceHandler @Inject()(
 
   def create(categoryInput: CategoryFormInput)(
     implicit mc: MarkerContext): Future[CategoryResource] = {
-    val data = CategoryData(CategoryId("999"), categoryInput.name)
-    // We don't actually create the post, so return what we have
+    var index = categoryRepository.size()
+
+    val data = CategoryData(CategoryId((index + 1).toString), categoryInput.name)
     categoryRepository.create(data).map { id =>
       createPostResource(data)
     }
@@ -45,14 +46,32 @@ class CategoryResourceHandler @Inject()(
     }
   }
 
+  def delete(id: String)(
+    implicit mc: MarkerContext): Future[Option[CategoryResource]] = {
+    val postFuture = categoryRepository.delete(CategoryId(id))
+    postFuture.map { maybePostData =>
+      maybePostData.map { postData =>
+        createPostResource(postData)
+      }
+    }
+  }
+
   def find(implicit mc: MarkerContext): Future[Iterable[CategoryResource]] = {
     categoryRepository.list().map { categoryDataList =>
       categoryDataList.map(categoryData => createPostResource(categoryData))
     }
   }
 
+  def update(id: String, categoryInput: CategoryFormInput)(
+    implicit mc: MarkerContext): Future[CategoryResource] = {
+    val data = CategoryData(CategoryId(id), categoryInput.name)
+    categoryRepository.update(CategoryId(id), data).map { id =>
+      createPostResource(data)
+    }
+  }
+
   private def createPostResource(p: CategoryData): CategoryResource = {
-    CategoryResource(p.id.toString, routerProvider.get.link(p.id), p.name)
+    CategoryResource(p.id.toString, p.name)
   }
 
 }

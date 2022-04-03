@@ -26,10 +26,12 @@ class ProductsResourceHandler @Inject()(
                                      routerProvider: Provider[ProductsRouter],
                                      productsRepository: ProductsRepository)(implicit ec: ExecutionContext) {
 
-  def create(postInput: ProductsFormInput)(
+  def create(productsInput: ProductsFormInput)(
       implicit mc: MarkerContext): Future[ProductResource] = {
-    val data = ProductData(ProductId("999"), postInput.title, postInput.price, postInput.category)
-    // We don't actually create the post, so return what we have
+    var index = productsRepository.size()
+
+    val data = ProductData(ProductId((index + 1).toString), productsInput.title, productsInput.price, productsInput.category)
+
     productsRepository.create(data).map { id =>
       createPostResource(data)
     }
@@ -46,8 +48,26 @@ class ProductsResourceHandler @Inject()(
   }
 
   def find(implicit mc: MarkerContext): Future[Iterable[ProductResource]] = {
-    productsRepository.list().map { postDataList =>
-      postDataList.map(postData => createPostResource(postData))
+    productsRepository.list().map { productDataList =>
+      productDataList.map(productData => createPostResource(productData))
+    }
+  }
+
+  def delete(id: String)(
+    implicit mc: MarkerContext): Future[Option[ProductResource]] = {
+    val postFuture = productsRepository.delete(ProductId(id))
+    postFuture.map { maybePostData =>
+      maybePostData.map { postData =>
+        createPostResource(postData)
+      }
+    }
+  }
+
+  def update(id: String, productInput: ProductsFormInput)(
+    implicit mc: MarkerContext): Future[ProductResource] = {
+    val data = ProductData(ProductId(id), productInput.title, productInput.price, productInput.category)
+    productsRepository.update(ProductId(id), data).map { id =>
+      createPostResource(data)
     }
   }
 

@@ -22,11 +22,17 @@ class ShoppingCardRouter @Inject()(controller: ShoppingCardController) extends S
     case GET(p"/") =>
       controller.index
 
+    case PUT(p"/$id") =>
+      controller.update(id)
+
     case POST(p"/") =>
       controller.process
 
     case GET(p"/$id") =>
       controller.show(id)
+
+    case DELETE(p"/$id") =>
+      controller.delete(id)
   }
 
 }

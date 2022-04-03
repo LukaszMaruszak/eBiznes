@@ -1,14 +1,14 @@
 package v1.shoppingCard
 
 import javax.inject.{Inject, Singleton}
-
 import akka.actor.ActorSystem
 import play.api.libs.concurrent.CustomExecutionContext
 import play.api.{Logger, MarkerContext}
 
+import scala.collection.mutable.ListBuffer
 import scala.concurrent.Future
 
-final case class ShoppingCardData(id: ShoppingCardId, title: String, body: String)
+final case class ShoppingCardData(id: ShoppingCardId,  title: String, quantity: String, price: String)
 
 class ShoppingCardId private(val underlying: Int) extends AnyVal {
   override def toString: String = underlying.toString
@@ -28,11 +28,17 @@ class ShoppingCardExecutionContext @Inject()(actorSystem: ActorSystem)
   * A pure non-blocking interface for the PostRepository.
   */
 trait ShoppingCardRepository {
+  def size()(implicit mc: MarkerContext): Int
+
   def create(data: ShoppingCardData)(implicit mc: MarkerContext): Future[ShoppingCardId]
 
   def list()(implicit mc: MarkerContext): Future[Iterable[ShoppingCardData]]
 
   def get(id: ShoppingCardId)(implicit mc: MarkerContext): Future[Option[ShoppingCardData]]
+
+  def delete(id: ShoppingCardId)(implicit mc: MarkerContext): Future[Option[ShoppingCardData]]
+
+  def update(id: ShoppingCardId, data: ShoppingCardData)(implicit mc: MarkerContext): Future[Iterable[ShoppingCardData]]
 }
 
 /**
@@ -48,19 +54,23 @@ class ShoppingCardRepositoryImpl @Inject()()(implicit ec: ShoppingCardExecutionC
 
   private val logger = Logger(this.getClass)
 
-  private val postList = List(
-    ShoppingCardData(ShoppingCardId("1"), "title 1", "blog post 1"),
-    ShoppingCardData(ShoppingCardId("2"), "title 2", "blog post 2"),
-    ShoppingCardData(ShoppingCardId("3"), "title 3", "blog post 3"),
-    ShoppingCardData(ShoppingCardId("4"), "title 4", "blog post 4"),
-    ShoppingCardData(ShoppingCardId("5"), "title 5", "blog post 5")
+  private val shoppingCardList = ListBuffer(
+    ShoppingCardData(ShoppingCardId("1"), "Banana", "2", "5zł"),
+    ShoppingCardData(ShoppingCardId("2"), "Orange", "10kg", "6zł"),
+    ShoppingCardData(ShoppingCardId("3"), "Potato", "5kg", "7zł"),
+    ShoppingCardData(ShoppingCardId("4"), "Cucumber", "1kg", "2.5zł"),
   )
+
+  override def size()(
+    implicit mc: MarkerContext): Int = {
+    shoppingCardList.length
+  }
 
   override def list()(
       implicit mc: MarkerContext): Future[Iterable[ShoppingCardData]] = {
     Future {
       logger.trace(s"list: ")
-      postList
+      shoppingCardList
     }
   }
 
@@ -68,15 +78,45 @@ class ShoppingCardRepositoryImpl @Inject()()(implicit ec: ShoppingCardExecutionC
       implicit mc: MarkerContext): Future[Option[ShoppingCardData]] = {
     Future {
       logger.trace(s"get: id = $id")
-      postList.find(post => post.id == id)
+      shoppingCardList.find(shoppingCard => shoppingCard.id == id)
+    }
+  }
+
+  override def delete(id: ShoppingCardId)(
+    implicit mc: MarkerContext): Future[Option[ShoppingCardData]] = {
+    Future {
+      logger.trace(s"delete: id = $id")
+      var elementIndex = shoppingCardList.indexWhere(category => category.id == id).toInt
+      var removed: ShoppingCardData = null
+      if(elementIndex != -1) {
+        removed = shoppingCardList.remove(elementIndex)
+      }
+
+      Option(removed)
     }
   }
 
   def create(data: ShoppingCardData)(implicit mc: MarkerContext): Future[ShoppingCardId] = {
     Future {
       logger.trace(s"create: data = $data")
+      shoppingCardList += data
       data.id
     }
   }
 
+  override def update(id: ShoppingCardId, data: ShoppingCardData)( implicit mc: MarkerContext): Future[Iterable[ShoppingCardData]] = {
+    logger.trace(s"id: id = $id")
+    logger.trace(s"update: data = $data")
+
+    Future {
+      var elementIndex = shoppingCardList.indexWhere(product => product.id == id).toInt
+      if(elementIndex != -1) {
+        shoppingCardList.update(elementIndex, data)
+      }
+      else {
+        shoppingCardList += data
+      }
+      shoppingCardList
+    }
+  }
 }
