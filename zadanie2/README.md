@@ -7,10 +7,12 @@
 - POST `/v1/category`
 - DELETE `/v1/category/:id`
 
-```body     {
+```
+body {
         "id": "1",
         "name": "Fruits"
-    }```
+    }
+```
 
 
 #Products
@@ -20,13 +22,15 @@
 - POST `/v1/products`
 - DELETE `/v1/products/:id`
 
-```body     {
+```
+body     {
         "id": "1",
         "link": "/v1/products/1",
         "title": "Banana",
         "price": "5 zł",
         "category": "Fruit"
-        }```
+        }
+```
  
 #Shopping Card
 - GET `/v1/card`
@@ -35,12 +39,14 @@
 - POST `/v1/card`
 - DELETE `/v1/card/:id`
 
-```body     {
+```
+body     {
         "id": "1",
         "title": "Banana",
         "quantity": "2",
         "price": "5zł"
-    }```
+    }
+```
 
 # Play REST API
 
