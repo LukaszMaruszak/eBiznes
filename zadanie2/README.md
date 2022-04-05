@@ -1,3 +1,53 @@
+## Endpoints
+
+#Category
+- GET `/v1/category`
+- GET `/v1/category/:id`
+- PUT `/v1/category/:id`
+- POST `/v1/category`
+- DELETE `/v1/category/:id`
+
+```
+body {
+        "id": "1",
+        "name": "Fruits"
+    }
+```
+
+
+#Products
+- GET `/v1/products`
+- GET `/v1/products/:id`
+- PUT `/v1/products/:id`
+- POST `/v1/products`
+- DELETE `/v1/products/:id`
+
+```
+body     {
+        "id": "1",
+        "link": "/v1/products/1",
+        "title": "Banana",
+        "price": "5 zł",
+        "category": "Fruit"
+        }
+```
+ 
+#Shopping Card
+- GET `/v1/card`
+- GET `/v1/card/:id`
+- PUT `/v1/card/:id`
+- POST `/v1/card`
+- DELETE `/v1/card/:id`
+
+```
+body     {
+        "id": "1",
+        "title": "Banana",
+        "quantity": "2",
+        "price": "5zł"
+    }
+```
+
 # Play REST API
 
 This is the example project for [Making a REST API in Play](http://developer.lightbend.com/guides/play-rest-api/index.html).
