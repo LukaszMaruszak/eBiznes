@@ -29,5 +29,8 @@ func main() {
 	e.POST("/payment", routing.SavePayment)
 	e.GET("/payment/:id", routing.GetPayment)
 
+	e.POST("/user", routing.SaveUser)
+	e.GET("/user/:id", routing.GetUser)
+
 	e.Logger.Fatal(e.Start(":1323"))
 }
