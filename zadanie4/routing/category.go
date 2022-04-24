@@ -1,29 +1,46 @@
 package routing
 
 import (
+	"fmt"
 	"github.com/labstack/echo/v4"
+	"goApp/database"
+	"goApp/models"
 	"net/http"
 )
 
-type Category struct {
-	Id   string `json:"id" form:"id" query:"id"`
-	Name string `json:"name" form:"name" query:"name"`
-}
-
 func GetCategories(c echo.Context) error {
-	return c.String(http.StatusOK, "Category list")
+	var categoryList []models.Category
+	fmt.Printf("Get category list\n")
+
+	if result := database.Database.Find(&categoryList); result.Error != nil {
+		return c.String(http.StatusNotFound, "Database Error")
+	}
+
+	return c.JSON(http.StatusOK, categoryList)
 }
 
 func GetCategory(c echo.Context) error {
 	id := c.Param("id")
-	return c.String(http.StatusOK, "Category with id: "+id)
+	var category models.Category
+	fmt.Printf("Get category with id: " + id + "\n")
+
+	if result := database.Database.First(&category, id); result.Error != nil {
+		return c.String(http.StatusNotFound, "Database Error")
+	}
+
+	return c.JSON(http.StatusOK, category)
 }
 
 func SaveCategory(c echo.Context) error {
-	category := new(Category)
+	category := new(models.Category)
+
+	fmt.Printf("Add new category \n")
+
 	if err := c.Bind(category); err != nil {
-		return c.String(http.StatusBadRequest, "Bad product"+err.Error())
+		return c.String(http.StatusBadRequest, "Bad user "+err.Error())
 	}
+
+	database.Database.Create(category)
 
 	return c.JSON(http.StatusOK, category)
 }
