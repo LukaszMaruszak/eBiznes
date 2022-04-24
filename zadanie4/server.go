@@ -1,14 +1,16 @@
 package main
 
 import (
-	"goApp/routing"
-	_ "goApp/routing"
-	"net/http"
-
 	"github.com/labstack/echo/v4"
+	"goApp/database"
+	"goApp/routing"
+
+	"net/http"
 )
 
 func main() {
+	database.InitDataBase()
+
 	e := echo.New()
 	e.GET("/", func(c echo.Context) error {
 		return c.String(http.StatusOK, "Hello, World!")
@@ -22,9 +24,8 @@ func main() {
 	e.GET("/category/:id", routing.GetCategory)
 	e.GET("/category", routing.GetCategories)
 
-	e.POST("/basket/:id", routing.AddItemToBasket)
-	e.GET("/basket", routing.GetItemsInBasket)
-	e.DELETE("/basket/:id", routing.DeleteItemInBasket)
+	e.POST("/order", routing.AddItemToOrder)
+	e.GET("/order/:id", routing.GetItemsInOrder)
 
 	e.POST("/payment", routing.SavePayment)
 	e.GET("/payment/:id", routing.GetPayment)

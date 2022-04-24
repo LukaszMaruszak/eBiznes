@@ -1,28 +1,35 @@
 package routing
 
 import (
+	"fmt"
 	"github.com/labstack/echo/v4"
+	"goApp/database"
+	"goApp/models"
 	"net/http"
 )
 
-type Payment struct {
-	Id         int    `json:"id" form:"id" query:"id"`
-	FirstName  string `json:"firstName" form:"firstName" query:"firstName"`
-	LastName   string `json:"lastName" form:"lastName" query:"lastName"`
-	CardNumber string `json:"cardNumber" form:"cardNumber" query:"cardNumber"`
-	Value      string `json:"value" form:"value" query:"value"`
-	Date       string `json:"date" form:"date" query:"date"`
-}
-
 func GetPayment(c echo.Context) error {
-	return c.String(http.StatusOK, "SavePayment list")
+	id := c.Param("id")
+	var payment models.Payment
+	fmt.Printf("Get Payment with id: " + id + "\n")
+
+	if result := database.Database.First(&payment, id); result.Error != nil {
+		return c.String(http.StatusNotFound, "Database Error")
+	}
+
+	return c.JSON(http.StatusOK, payment)
 }
 
 func SavePayment(c echo.Context) error {
-	payment := new(Payment)
+	payment := new(models.Payment)
+
+	fmt.Printf("Add new payment \n")
+
 	if err := c.Bind(payment); err != nil {
-		return c.String(http.StatusBadRequest, "Bad product"+err.Error())
+		return c.String(http.StatusBadRequest, "Bad payment "+err.Error())
 	}
+
+	database.Database.Create(payment)
 
 	return c.JSON(http.StatusOK, payment)
 }
