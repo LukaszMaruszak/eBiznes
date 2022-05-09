@@ -13,7 +13,7 @@ function Payment() {
 
     let paymentDetails = {
         cardholderName: '',
-        cardName: '',
+        cardNumber: '',
         expiryDate: '',
         ccv: '',
     }
@@ -57,8 +57,8 @@ function Payment() {
             errors.cardholderName = "Podaj imię i nazwisko posiadacza karty!";
         }
 
-        if(!values.cardName) {
-            errors.cardName = "Podaj numer karty";
+        if(!values.cardNumber) {
+            errors.cardNumber = "Podaj numer karty";
         }
 
         if(!values.expiryDate) {
@@ -111,10 +111,10 @@ function Payment() {
                                     label="Numer karty"
                                     type="text"
                                     variant="standard"
-                                    value={formValues.cardName}
+                                    value={formValues.cardNumber}
                                     onChange={handleChange}
-                                    error={!!formErrors.cardName}
-                                    helperText={formErrors.cardName}
+                                    error={!!formErrors.cardNumber}
+                                    helperText={formErrors.cardNumber}
                                 />
                             </FormControl>
                         </Grid>
