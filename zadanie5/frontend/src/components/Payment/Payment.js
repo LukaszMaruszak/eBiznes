@@ -3,7 +3,7 @@ import * as React from 'react';
 import {Grid, FormControl, TextField, Stack, Button} from "@mui/material";
 import SendIcon from '@mui/icons-material/Send';
 import {useEffect, useState} from "react";
-import {Link, useLocation} from "react-router-dom";
+import {useLocation} from "react-router-dom";
 import ValidPayment from "../ValidPayment/ValidPayment";
 import {paymentService} from "../../service/PaymentService";
 
@@ -19,7 +19,7 @@ function Payment() {
     }
 
     const [formValues, setFormValues] = useState(paymentDetails);
-    const [paymentValue, setPaymentValue] = useState(location.state.value);
+    const [paymentValue] = useState(location.state.value);
     const [isSubmit, setIsSubmit] = useState(false);
     const [formErrors, setFormErrors] = useState({});
     const [validPayment, setValidPayment] = useState(false);
@@ -48,7 +48,7 @@ function Payment() {
                     setIsSubmit(false);
                 });
         }
-    }, [formErrors, isSubmit, formValues, validPayment]);
+    }, [formErrors, paymentValue, isSubmit, formValues, validPayment]);
 
     const validate = (values) => {
         const errors = {};

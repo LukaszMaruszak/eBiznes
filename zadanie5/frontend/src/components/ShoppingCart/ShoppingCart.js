@@ -1,16 +1,13 @@
 import './ShoppingCart.scss';
 import * as React from 'react';
-import {Button, Grid, Icon, IconButton, Stack, TextField} from "@mui/material";
+import {Button, Icon, Stack, TextField} from "@mui/material";
 import PaymentIcon from '@mui/icons-material/Payment';
-import {useContext, useEffect, useState} from "react";
+import {useContext,} from "react";
 import {useNavigate} from "react-router";
-import {Link} from "react-router-dom";
 import {ShoppingCardContext} from "../../context/ShoppingCardContext";
 
 function ShoppingCart() {
     const navigate = useNavigate();
-
-    const icons = ["computer", "keyboard", "laptop_mac", "mouse", "tv", "phone_iphone","headphones","phone_android", "videogame_asset"]
 
     const {products, addProductToShoppingCard, removeProductFromShoppingCard} = useContext(ShoppingCardContext)
 
