@@ -11,7 +11,7 @@ function Navbar() {
             </Typography>
 
                 <div>
-                    <IconButton aria-label="delete" color="primary" component={Link} to="/shopping-cart">
+                    <IconButton class="shopping-cart" aria-label="shopping-cart" color="primary" component={Link} to="/shopping-cart">
                         <ShoppingCartIcon />
                     </IconButton>
                 </div>
