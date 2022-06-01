@@ -6,6 +6,7 @@ import {BrowserRouter as Router, Route, Routes} from 'react-router-dom';
 import Payment from "./components/Payment/Payment";
 import {ShoppingCardContextProvider} from "./context/ShoppingCardContext";
 import {ProductListContextProvider} from "./context/ProductsListContext";
+import Login from "./components/Login/Login";
 
 function App() {
   return (
@@ -19,6 +20,8 @@ function App() {
                       <Route path="/shopping-cart" element={<ShoppingCart />}/>
 
                       <Route path="/payment" element={<Payment />}/>
+
+                      <Route path="/login" element={<Login />}/>
 
                       <Route path="/" element={<ProductsList/>}/>
                   </Routes>
