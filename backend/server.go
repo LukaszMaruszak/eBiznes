@@ -1,8 +1,7 @@
 package main
 
 import (
-	"github.com/joho/godotenv"
-	_ "github.com/labstack/echo/v4"
+	"github.com/labstack/echo/v4"
 	"github.com/labstack/echo/v4/middleware"
 	"goApp/database"
 	"goApp/routing"
@@ -12,11 +11,6 @@ import (
 
 func main() {
 	database.InitDataBase()
-
-	err := godotenv.Load(".env")
-	if err != nil {
-		print("Error loading .env file!\n")
-	}
 
 	e := echo.New()
 	e.Use(middleware.CORS())
