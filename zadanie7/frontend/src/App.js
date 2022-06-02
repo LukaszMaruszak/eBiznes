@@ -7,6 +7,7 @@ import Payment from "./components/Payment/Payment";
 import {ShoppingCardContextProvider} from "./context/ShoppingCardContext";
 import {ProductListContextProvider} from "./context/ProductsListContext";
 import Login from "./components/Login/Login";
+import {LoginSuccess} from "./components/Login/LoginSuccess";
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
                       <Route path="/payment" element={<Payment />}/>
 
                       <Route path="/login" element={<Login />}/>
+                      <Route exact path="/login/success" element={<LoginSuccess />}/>
 
                       <Route path="/" element={<ProductsList/>}/>
                   </Routes>
