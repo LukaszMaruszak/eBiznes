@@ -1,0 +1,35 @@
+{
+    "auth": {
+        "username": "...",
+        "access_key": "..."
+    },
+    "browsers": [
+        {
+            "browser": "chrome",
+            "os": "Windows 10",
+            "versions": ["latest"]
+        },
+        {
+            "browser": "chrome",
+            "os": "OS X Mojave",
+            "versions": ["latest"]
+        }
+    ],
+    "run_settings": {
+        "cypress_config_file": "cypress.json",
+        "project_name": "The-Gadget-Zone",
+        "build_name": "Cypress Build Test",
+        "exclude": [],
+        "parallels": "2",
+        "npm_dependencies": {},
+        "package_config_options": {},
+        "headless": true
+    },
+    "connection_settings": {
+        "local": true,
+        "local_identifier": null,
+        "local_mode": null,
+        "local_config_file": null
+    },
+    "disable_usage_reporting": false
+}
