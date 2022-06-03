@@ -26,7 +26,9 @@ func main() {
 
 	e.GET("/google/callback", routing.GoogleCallback)
 	e.GET("/google/login", routing.GoogleLogin)
-	e.GET("/auth/user", routing.AuthUser)
+
+	e.GET("/github/callback", routing.GithubCallback)
+	e.GET("/github/login", routing.GithubLogin)
 
 	e.POST("/products", routing.SaveProduct)
 	e.GET("/products/:id", routing.GetProduct)

@@ -1,30 +1,29 @@
 import React from 'react';
-// import GoogleLogin from 'react-google-login';
-import GoogleButton from 'react-google-button';
+import { GithubLoginButton } from "react-social-login-buttons";
+import { GoogleLoginButton } from "react-social-login-buttons";
 import axios from "../../config/AxiosConfig";
 
 function Login() {
 
-    const fetchAuthUser = async () => {
-        const respone = await axios.get('/auth/user')
+    const redirectToGoogleSSO = async () => {
+        axios.get("/google/login").then((googleLoginURL) => {
+            console.log(googleLoginURL.data)
+            const newWindow = window.open(googleLoginURL.data, "_self");
+        });
     }
 
-    const redirectToGoogleSSO = async () => {
-        axios.get("/google/login").then((googleLoginURL) =>{
-            console.log(googleLoginURL.data)
-            const newWindow = window.open(googleLoginURL.data, "_blank", "width=500, height=600");
+    const redirectToGitHubSSO = async () => {
+        axios.get("/github/login").then((githubLoginURL) => {
+            console.log(githubLoginURL.data)
+            const newWindow = window.open(githubLoginURL.data, "_self");
         });
     }
 
     return (
         <div style={{margin: '20% 30%'}}>
-            <GoogleButton onClick={redirectToGoogleSSO}/>
+            <GoogleLoginButton onClick={redirectToGoogleSSO}/>
 
-            {/*<GoogleLogout*/}
-            {/*    clientId={process.env.REACT_APP_CLIENT_ID}*/}
-            {/*    buttonText="Logout"*/}
-            {/*    onLogoutSuccess={onLogoutSuccess}>*/}
-            {/*</GoogleLogout>*/}
+            <GithubLoginButton onClick={redirectToGitHubSSO}/>
         </div>
 
     );
