@@ -1,7 +1,22 @@
-[0m[[0m[31merror[0m] [0m[0m/home/lukasz/ebiznes/eBiznes/zadanie2/app/v1/shoppingCard/ShoppingCardRepository.scala:39:73: not found: type CategoryData[0m
-[0m[[0m[31merror[0m] [0m[0m  def delete(id: CategoryId)(implicit mc: MarkerContext): Future[Option[CategoryData]][0m
-[0m[[0m[31merror[0m] [0m[0m                                                                        ^[0m
-[0m[[0m[31merror[0m] [0m[0m/home/lukasz/ebiznes/eBiznes/zadanie2/app/v1/shoppingCard/ShoppingCardRepository.scala:39:18: not found: type CategoryId[0m
-[0m[[0m[31merror[0m] [0m[0m  def delete(id: CategoryId)(implicit mc: MarkerContext): Future[Option[CategoryData]][0m
-[0m[[0m[31merror[0m] [0m[0m                 ^[0m
-[0m[[0m[31merror[0m] [0m[0mtwo errors found[0m
+[error] D:\Users\lukas\Documents\materialy\studia II stopnień\II semestr\ebiznes\zadanie4\zadanie2\app\v1\products\ProductsController.scala:34:35: not found: value ProductsAction
+[error]   def index: Action[AnyContent] = ProductsAction.async { implicit request =>
+[error]                                   ^
+[error] D:\Users\lukas\Documents\materialy\studia II stopnień\II semestr\ebiznes\zadanie4\zadanie2\app\v1\products\ProductsController.scala:41:37: not found: value ProductsAction
+[error]   def process: Action[AnyContent] = ProductsAction.async { implicit request =>
+[error]                                     ^
+[error] D:\Users\lukas\Documents\materialy\studia II stopnień\II semestr\ebiznes\zadanie4\zadanie2\app\v1\products\ProductsController.scala:43:20: could not find implicit value for parameter request: v1.products.ProductRequest[A] (An implicit MessagesProvider instance was not found.  Please see https://www.playframework.com/documentation/latest/ScalaForms#Passing-MessagesProvider-to-Form-Helpers)
+[error]     processJsonPost()
+[error]                    ^
+[error] D:\Users\lukas\Documents\materialy\studia II stopnień\II semestr\ebiznes\zadanie4\zadanie2\app\v1\products\ProductsController.scala:46:46: not found: value ProductsAction
+[error]   def show(id: String): Action[AnyContent] = ProductsAction.async {
+[error]                                              ^
+[error] D:\Users\lukas\Documents\materialy\studia II stopnień\II semestr\ebiznes\zadanie4\zadanie2\app\v1\products\ProductsController.scala:54:48: not found: value ProductsAction
+[error]   def delete(id: String): Action[AnyContent] = ProductsAction.async {
+[error]                                                ^
+[error] D:\Users\lukas\Documents\materialy\studia II stopnień\II semestr\ebiznes\zadanie4\zadanie2\app\v1\products\ProductsController.scala:62:48: not found: value ProductsAction
+[error]   def update(id: String): Action[AnyContent] = ProductsAction.async {
+[error]                                                ^
+[error] D:\Users\lukas\Documents\materialy\studia II stopnień\II semestr\ebiznes\zadanie4\zadanie2\app\v1\products\ProductsController.scala:65:24: could not find implicit value for parameter request: v1.products.ProductRequest[A] (An implicit MessagesProvider instance was not found.  Please see https://www.playframework.com/documentation/latest/ScalaForms#Passing-MessagesProvider-to-Form-Helpers)
+[error]       processJsonUpdate(id)
+[error]                        ^
+[error] 7 errors found

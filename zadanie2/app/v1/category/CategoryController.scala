@@ -29,19 +29,19 @@ class CategoryController @Inject()(cc: CategoryControllerComponents)(
     )
   }
 
-  def index: Action[AnyContent] = CategoryAction.async { implicit request =>
+  def index: Action[AnyContent] = categoryAction.async { implicit request =>
     logger.trace("index: ")
     categoryResourceHandler.find.map { products =>
       Ok(Json.toJson(products))
     }
   }
 
-  def process: Action[AnyContent] = CategoryAction.async { implicit request =>
+  def process: Action[AnyContent] = categoryAction.async { implicit request =>
     logger.trace("process: ")
     processJsonPost()
   }
 
-  def show(id: String): Action[AnyContent] = CategoryAction.async {
+  def show(id: String): Action[AnyContent] = categoryAction.async {
     implicit request =>
       logger.trace(s"show: id = $id")
       categoryResourceHandler.lookup(id).map { category =>
@@ -49,7 +49,7 @@ class CategoryController @Inject()(cc: CategoryControllerComponents)(
       }
   }
 
-  def delete(id: String): Action[AnyContent] = CategoryAction.async {
+  def delete(id: String): Action[AnyContent] = categoryAction.async {
     implicit request =>
       logger.trace(s"delete: id = $id")
       categoryResourceHandler.delete(id).map { category =>
@@ -57,7 +57,7 @@ class CategoryController @Inject()(cc: CategoryControllerComponents)(
       }
   }
 
-  def update(id: String): Action[AnyContent] = CategoryAction.async {
+  def update(id: String): Action[AnyContent] = categoryAction.async {
     implicit request =>
       logger.trace(s"update: id = $id")
       processJsonUpdate(id)

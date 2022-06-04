@@ -109,7 +109,7 @@ class CategoryBaseController @Inject()(pcc: CategoryControllerComponents)
     with RequestMarkerContext {
   override protected def controllerComponents: ControllerComponents = pcc
 
-  def CategoryAction: CategoryActionBuilder = pcc.categoryActionBuilder
+  def categoryAction: CategoryActionBuilder = pcc.categoryActionBuilder
 
   def categoryResourceHandler: CategoryResourceHandler = pcc.categoryResourceHandler
 }

@@ -109,7 +109,7 @@ class ProductBaseController @Inject()(pcc: ProductControllerComponents)
     with RequestMarkerContext {
   override protected def controllerComponents: ControllerComponents = pcc
 
-  def ProductsAction: ProductsActionBuilder = pcc.productsActionBuilder
+  def productsAction: ProductsActionBuilder = pcc.productsActionBuilder
 
   def productsResourceHandler: ProductsResourceHandler = pcc.productsResourceHandler
 }
