@@ -110,7 +110,7 @@ class ShoppingCardBaseController @Inject()(pcc: ShoppingCardControllerComponents
     with RequestMarkerContext {
   override protected def controllerComponents: ControllerComponents = pcc
 
-  def ShoppingCardAction: ShoppingCardActionBuilder = pcc.shoppingCardActionBuilder
+  def shoppingCardAction: ShoppingCardActionBuilder = pcc.shoppingCardActionBuilder
 
   def shoppingCardResourceHandler: ShoppingCardResourceHandler = pcc.shoppingCardResourceHandler
 }

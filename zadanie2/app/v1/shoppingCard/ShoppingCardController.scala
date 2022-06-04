@@ -33,19 +33,19 @@ class ShoppingCardController @Inject()(cc: ShoppingCardControllerComponents)(
     )
   }
 
-  def index: Action[AnyContent] = ShoppingCardAction.async { implicit request =>
+  def index: Action[AnyContent] = shoppingCardAction.async { implicit request =>
     logger.trace("index: ")
     shoppingCardResourceHandler.find.map { shoppingCard =>
       Ok(Json.toJson(shoppingCard))
     }
   }
 
-  def process: Action[AnyContent] = ShoppingCardAction.async { implicit request =>
+  def process: Action[AnyContent] = shoppingCardAction.async { implicit request =>
     logger.trace("process: ")
     processJsonPost()
   }
 
-  def show(id: String): Action[AnyContent] = ShoppingCardAction.async {
+  def show(id: String): Action[AnyContent] = shoppingCardAction.async {
     implicit request =>
       logger.trace(s"show: id = $id")
       shoppingCardResourceHandler.lookup(id).map { shoppingCard =>
@@ -53,7 +53,7 @@ class ShoppingCardController @Inject()(cc: ShoppingCardControllerComponents)(
       }
   }
 
-  def delete(id: String): Action[AnyContent] = ShoppingCardAction.async {
+  def delete(id: String): Action[AnyContent] = shoppingCardAction.async {
     implicit request =>
       logger.trace(s"delete: id = $id")
       shoppingCardResourceHandler.delete(id).map { card =>
@@ -61,7 +61,7 @@ class ShoppingCardController @Inject()(cc: ShoppingCardControllerComponents)(
       }
   }
 
-  def update(id: String): Action[AnyContent] = ShoppingCardAction.async {
+  def update(id: String): Action[AnyContent] = shoppingCardAction.async {
     implicit request =>
       logger.trace(s"update: id = $id")
       processJsonUpdate(id)
