@@ -1,0 +1,15 @@
+.payment {
+  padding: 20px;
+
+  &__form {
+    background-color: #f3f3f3;
+    border-radius: 25px;
+    padding: 25px;
+  }
+
+  &__order-button {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 25px;
+  }
+}
