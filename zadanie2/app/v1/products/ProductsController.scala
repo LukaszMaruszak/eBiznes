@@ -31,19 +31,19 @@ class ProductsController @Inject()(cc: ProductControllerComponents)(
     )
   }
 
-  def index: Action[AnyContent] = ProductsAction.async { implicit request =>
+  def index: Action[AnyContent] = productsAction.async { implicit request =>
     logger.trace("index: ")
     productsResourceHandler.find.map { products =>
       Ok(Json.toJson(products))
     }
   }
 
-  def process: Action[AnyContent] = ProductsAction.async { implicit request =>
+  def process: Action[AnyContent] = productsAction.async { implicit request =>
     logger.trace("process: ")
     processJsonPost()
   }
 
-  def show(id: String): Action[AnyContent] = ProductsAction.async {
+  def show(id: String): Action[AnyContent] = productsAction.async {
     implicit request =>
       logger.trace(s"show: id = $id")
       productsResourceHandler.lookup(id).map { product =>
@@ -51,7 +51,7 @@ class ProductsController @Inject()(cc: ProductControllerComponents)(
       }
   }
 
-  def delete(id: String): Action[AnyContent] = ProductsAction.async {
+  def delete(id: String): Action[AnyContent] = productsAction.async {
     implicit request =>
       logger.trace(s"delete: id = $id")
       productsResourceHandler.delete(id).map { product =>
@@ -59,7 +59,7 @@ class ProductsController @Inject()(cc: ProductControllerComponents)(
       }
   }
 
-  def update(id: String): Action[AnyContent] = ProductsAction.async {
+  def update(id: String): Action[AnyContent] = productsAction.async {
     implicit request =>
       logger.trace(s"update: id = $id")
       processJsonUpdate(id)
