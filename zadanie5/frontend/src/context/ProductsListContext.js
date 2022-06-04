@@ -9,7 +9,7 @@ export const ProductListContextProvider = ({children}) => {
     const [productsList, setProductsList] = useState([]);
 
     useEffect(() => {
-        productsService.getProducts().then((productsList) => setProductsList(productsList));
+        productsService.getProducts().then((productsListData) => setProductsList(productsListData));
     }, [])
 
     return (

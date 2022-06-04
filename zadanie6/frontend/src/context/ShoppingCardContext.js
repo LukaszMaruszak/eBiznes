@@ -2,8 +2,12 @@ import {useState, createContext} from "react";
 
 export const ShoppingCardContext = createContext({
     products: [],
-    addProductToShoppingCard: () => {},
-    removeProductFromShoppingCard: () => {},
+    addProductToShoppingCard: () => {
+        // This is intentional
+    },
+    removeProductFromShoppingCard: () => {
+        // This is intentional
+    },
 });
 
 export const ShoppingCardContextProvider = ({children}) => {
@@ -31,8 +35,8 @@ export const ShoppingCardContextProvider = ({children}) => {
         setProducts(checkZeroQuantity(updatedProducts));
     }
 
-    function checkZeroQuantity(products) {
-        return products.filter((product) => product.quantity !== 0);
+    function checkZeroQuantity(productsQuantity) {
+        return productsQuantity.filter((product) => product.quantity !== 0);
     }
 
     return (

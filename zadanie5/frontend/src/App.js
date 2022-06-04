@@ -1,4 +1,3 @@
-import './App.scss';
 import Navbar from "./components/Navbar/Navbar";
 import ProductsList from "./components/ProductsList/ProductsList";
 import ShoppingCart from "./components/ShoppingCart/ShoppingCart";
