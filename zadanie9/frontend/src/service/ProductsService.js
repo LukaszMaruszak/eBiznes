@@ -1,7 +1,7 @@
 import axios from '../config/AxiosConfig';
 
 function getProducts() {
-    return axios.get("/products").then((res) =>{
+    return axios.get('/products').then((res) => {
         console.log(res.data);
         return res.data;
     });
@@ -9,5 +9,4 @@ function getProducts() {
 
 export const productsService = {
     getProducts,
-}
-
+};

@@ -1,7 +1,3 @@
 ## The Gadget Zone
 
-![img.png](img.png)
-
-![img_1.png](img_1.png)
-
-![img_2.png](img_2.png)
+https://the-gadget-zone.azurewebsites.net
