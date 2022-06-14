@@ -26,4 +26,4 @@ jobs:
       run: docker build . --file Dockerfile --tag lmaruszak/server:$(date +%s)
     - name: Docker Push
       working-directory: ./zadanie9/backend
-      run: docker push ${{secrets.DOCKER_USER}}/server:latest
+      run: docker push ${{secrets.DOCKER_USER}}/server:$(date +%s)
