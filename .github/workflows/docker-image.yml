@@ -26,7 +26,7 @@ jobs:
         docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
     - name: Build the Docker image
       working-directory: ./zadanie9/backend
-      run: docker build . --file Dockerfile --tag lmaruszak/server:$TAG
+      run: docker build . --file Dockerfile --tag lmaruszak/server:${{env.TAG}}
     - name: Docker Push
       working-directory: ./zadanie9/backend
-      run: docker push lmaruszak/server:$TAG
+      run: docker push lmaruszak/server:${{env.TAG}}
