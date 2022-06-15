@@ -52,4 +52,4 @@ jobs:
         app-name: 'the-gadget-zone'
         slot-name: 'production'
         publish-profile: ${{ secrets.AzureAppService_PublishProfile_4e3e00680f004975a1b1a92e249fc34e }}
-        images: 'index.docker.io/${{ secrets.AzureAppService_ContainerUsername_a7a6b53415ba405ca0d1cf8473b51dc6 }}/lmaruszak/client:${{ github.sha }}'
+        images: 'lmaruszak/client:latest'
