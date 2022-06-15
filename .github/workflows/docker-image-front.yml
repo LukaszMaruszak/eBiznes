@@ -27,3 +27,20 @@ jobs:
     - name: Docker Push
       working-directory: ./zadanie9/frontend
       run: docker push lmaruszak/client:latest
+      
+  deploy:
+    runs-on: ubuntu-latest
+    needs: build
+    environment:
+      name: 'production'
+      url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
+
+    steps:
+    - name: Deploy to Azure Web App
+      id: deploy-to-webapp
+      uses: azure/webapps-deploy@v2
+      with:
+        app-name: 'the-gadget-zone'
+        slot-name: 'production'
+        publish-profile: ${{ secrets.AzureAppService_PublishProfile_4e3e00680f004975a1b1a92e249fc34e }}
+        images: 'index.docker.io/${{ secrets.AzureAppService_ContainerUsername_a7a6b53415ba405ca0d1cf8473b51dc6 }}/lmaruszak/client:${{ github.sha }}'
