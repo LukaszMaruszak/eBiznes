@@ -27,3 +27,19 @@ jobs:
     - name: Docker Push
       working-directory: ./zadanie9/backend
       run: docker push lmaruszak/server:latest
+  deploy:
+    runs-on: ubuntu-latest
+    needs: build
+    environment:
+      name: 'production'
+      url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
+
+    steps:
+    - name: Deploy to Azure Web App
+      id: deploy-to-webapp
+      uses: azure/webapps-deploy@v2
+      with:
+        app-name: 'the-gadget-zone-server'
+        slot-name: 'production'
+        publish-profile: ${{ secrets.AzureAppService_PublishProfile_b8a7322895024647b13baae9cd597886 }}
+        images: 'lmaruszak/server:latest'
