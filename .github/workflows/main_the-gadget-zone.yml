@@ -29,6 +29,7 @@ jobs:
     - name: Build and push container image to registry
       uses: docker/build-push-action@v2
       with:
+        working-directory: ./zadanie9/frontend
         push: true
         tags: index.docker.io/${{ secrets.AzureAppService_ContainerUsername_a7a6b53415ba405ca0d1cf8473b51dc6 }}/lmaruszak/client:${{ github.sha }}
         file: ./Dockerfile
@@ -45,6 +46,7 @@ jobs:
       id: deploy-to-webapp
       uses: azure/webapps-deploy@v2
       with:
+        working-directory: ./zadanie9/frontend
         app-name: 'the-gadget-zone'
         slot-name: 'production'
         publish-profile: ${{ secrets.AzureAppService_PublishProfile_4e3e00680f004975a1b1a92e249fc34e }}
